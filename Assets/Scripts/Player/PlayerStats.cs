@@ -122,10 +122,10 @@ public class PlayerStats : MonoBehaviour
         switch (_type)
         {
             case PickupType.Health:
-                ReduceStatValue(ref m_currentHealth, _pickup.GetComponent<Pickup>().PickupObject.Value);
+                ReduceStatValue(ref m_currentHealth, _pickup.GetComponent<Pickup>().PickupObject.Value,0, _pickup);
                 break;
             case PickupType.Score:
-                ReduceStatValue(ref m_currentScore, _pickup.GetComponent<Pickup>().PickupObject.Value);
+                ReduceStatValue(ref m_currentScore,_pickup.GetComponent<Pickup>().PickupObject.Value,m_maxScore, _pickup);
                 break;
         }
     }

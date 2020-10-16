@@ -8,12 +8,13 @@ public class ColourBlindSettings : MonoBehaviour
     SpriteRenderer[] m_gameObjectsinScene;
     void Start()
     {
-        m_gameObjectsinScene = FindObjectsOfType<SpriteRenderer>();
+  
         
     }
     public void LoopThroughObjects(ColourBlindBase _obj)
     {
         string presetName = _obj.name;
+        m_gameObjectsinScene = FindObjectsOfType<SpriteRenderer>();
         foreach (SpriteRenderer go in m_gameObjectsinScene)
         {
             if(go.gameObject.tag.Contains("DoColourChange"))

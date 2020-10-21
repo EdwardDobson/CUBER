@@ -8,8 +8,8 @@ public class ColourBlindSettings : MonoBehaviour
     SpriteRenderer[] m_gameObjectsinScene;
     void Start()
     {
-  
-        
+
+
     }
     public void LoopThroughObjects(ColourBlindBase _obj)
     {

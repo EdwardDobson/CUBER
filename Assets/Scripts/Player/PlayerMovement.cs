@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     void MoveOnGround()
     {
         float H = Input.GetAxis("Horizontal");
-        m_rb2d.velocity = new Vector2(H, 0) * m_speed * m_groundSpeedMultiplier;
+        m_rb2d.AddForce(new Vector2(H, 0) * m_speed * m_groundSpeedMultiplier);
     }
     void MoveInAir()
     {

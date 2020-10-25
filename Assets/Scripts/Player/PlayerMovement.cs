@@ -37,11 +37,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float m_maxVelo;
     // Start is called before the first frame update
+    GhostReplay m_replay;
     void Start()
     {
         m_rb2d = GetComponent<Rigidbody2D>();
         m_groundCheck = GetComponent<GroundCheck>();
         m_wallMask = LayerMask.GetMask("Wall");
+        m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
     }
 
     // Update is called once per frame
@@ -55,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
  
         WallJumping();
         SquishEffectJump();
-
-
+        m_replay.AddPositions(transform.position);
+     //   m_replay.AddHorizontalValues(m_horizontal);
     }
     private void FixedUpdate()
     {

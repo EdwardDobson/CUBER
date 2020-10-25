@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float m_speed;
     [SerializeField]
+    float m_speedBoost;
+    [SerializeField]
     float m_jumpForce;
     [SerializeField]
     float m_groundSpeedMultiplier;
@@ -17,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
     GroundCheck m_groundCheck;
     [SerializeField]
     Vector3 m_jumpStretchSize;
+    [SerializeField]
+    Vector3 m_slideStretchSize;
     float m_horizontal;
     public Transform m_frontCheck;
     bool m_grabbedWall;
     bool m_wallSliding;
     bool m_isJumping;
+    bool m_isSliding;
     [SerializeField]
     float m_wallSlidingSpeed;
     LayerMask m_wallMask;
@@ -56,10 +61,14 @@ public class PlayerMovement : MonoBehaviour
         }
  
         WallJumping();
-        SquishEffectJump();
         m_replay.AddPositions(transform.position);
-     //   m_replay.AddHorizontalValues(m_horizontal);
-    }
+        Sliding();
+        if (m_groundCheck.isGrounded() && !m_isJumping && !m_isSliding)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+            //   m_replay.AddHorizontalValues(m_horizontal);
+     }
     private void FixedUpdate()
     {
         if (m_groundCheck.isGrounded() == true)
@@ -69,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             MoveInAir();
+            m_isSliding = false;
         }
         if (m_isJumping)
             Jump();
@@ -113,21 +123,38 @@ public class PlayerMovement : MonoBehaviour
         m_rb2d.velocity = Vector2.ClampMagnitude(m_rb2d.velocity, m_maxVelo);
         SquishEffectJump();
         m_isJumping = false;
-
+        m_isSliding = false;
     }
 
     void SquishEffectJump()
     {
-        if (m_groundCheck.isGrounded())
+         transform.localScale = new Vector3(transform.localScale.x, Mathf.Lerp(transform.localScale.y, m_jumpStretchSize.y, transform.localScale.y), transform.localScale.z);
+    }
+    void Sliding()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !m_isSliding && m_groundCheck.isGrounded())
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            m_speed = m_speed* m_speedBoost;
+            SlideSquishDown();
+            m_isSliding = true;
+            m_isJumping = false;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.LeftShift) && m_isSliding && m_groundCheck.isGrounded())
         {
-            transform.localScale = new Vector3(transform.localScale.x, Mathf.Lerp(transform.localScale.y, m_jumpStretchSize.y, transform.localScale.y), transform.localScale.z);
+            m_speed = m_speed / m_speedBoost;
+            SlideSquishUp();
+            m_isSliding = false;
         }
     }
-
+    void SlideSquishDown()
+    {
+         transform.localScale = new Vector3(1, 0.8f, 1);
+        Debug.Log("Sliding");
+    }
+    void SlideSquishUp()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
     void WallGrab()
     {
         m_grabbedWall = Physics2D.OverlapCircle(m_frontCheck.position, m_checkRadius, m_wallMask);

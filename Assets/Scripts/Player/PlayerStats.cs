@@ -10,6 +10,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     int m_currentHealth = 0;
     [SerializeField]
+    int m_currentShield = 0;
+    [SerializeField]
+    int m_maxShield = 3;
+    [SerializeField]
     int m_maxScore = 0;
     [SerializeField]
     int m_currentScore = 0;
@@ -28,8 +32,10 @@ public class PlayerStats : MonoBehaviour
         m_ui = GameObject.Find("UI");
         m_ui.transform.GetChild(0).GetComponent<Slider>().maxValue = m_maxHealth;
         m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_maxHealth;
-        m_livesText = m_ui.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        m_scoreText = m_ui.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
+        m_ui.transform.GetChild(1).GetComponent<Slider>().maxValue = m_maxShield;
+        m_livesText = m_ui.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         m_livesText.text = "Lives: " + m_lives;
         m_spawnLocation = transform.position;
     }
@@ -43,6 +49,8 @@ public class PlayerStats : MonoBehaviour
             m_currentScore = 0;
         Die();
         m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
+        m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
+
         m_scoreText.text = "Score: " + m_currentScore;
     }
     public void AddStats(ref int _valueToIncrease,  int _valueForIncrease, int _maxValue = 0, GameObject _pickup = null)
@@ -67,11 +75,21 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(int _value)
     {
-        if (m_currentHealth >= 0)
+        if(m_currentShield <= 0)
         {
-            m_currentHealth -= _value;
-
+            if (m_currentHealth >= 0)
+            {
+                m_currentHealth -= _value;
+            }
         }
+        else
+        {
+            if (m_currentShield >= 0)
+            {
+                m_currentShield -= _value;
+            }
+        }
+  
     }
     public void ResetScore()
     {
@@ -114,6 +132,9 @@ public class PlayerStats : MonoBehaviour
             case PickupType.Score:
                 AddStats(ref m_currentScore, _pickup.GetComponent<Pickup>().PickupObject.Value, m_maxScore, _pickup);
                 break;
+            case PickupType.Shield:
+                AddStats(ref m_currentShield, _pickup.GetComponent<Pickup>().PickupObject.Value, m_maxShield,_pickup);
+                break;
         }
     }
     //A function used for calling applying negative pickup values
@@ -126,6 +147,9 @@ public class PlayerStats : MonoBehaviour
                 break;
             case PickupType.Score:
                 ReduceStatValue(ref m_currentScore,_pickup.GetComponent<Pickup>().PickupObject.Value,m_maxScore, _pickup);
+                break;
+            case PickupType.Shield:
+                ReduceStatValue(ref m_currentShield, _pickup.GetComponent<Pickup>().PickupObject.Value, m_maxScore, _pickup);
                 break;
         }
     }

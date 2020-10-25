@@ -45,6 +45,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (m_currentHealth > m_maxHealth)
             m_currentHealth = m_maxHealth;
+        if (m_currentShield > m_maxShield)
+            m_currentShield = m_maxShield;
         if (m_currentScore <= 0)
             m_currentScore = 0;
         Die();

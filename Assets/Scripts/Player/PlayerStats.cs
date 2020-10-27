@@ -24,6 +24,8 @@ public class PlayerStats : MonoBehaviour
     TextMeshProUGUI m_scoreText;
     bool m_shouldRespawn;
     Vector3 m_spawnLocation;
+    ParticleSystem m_bloodEffect;
+    ParticleSystem m_shieldEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,8 @@ public class PlayerStats : MonoBehaviour
         m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         m_livesText.text = "Lives: " + m_lives;
         m_spawnLocation = transform.position;
+        m_bloodEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
+        m_shieldEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -84,6 +88,7 @@ public class PlayerStats : MonoBehaviour
             if (m_currentHealth >= 0)
             {
                 m_currentHealth -= _value;
+                PlayBloodEffect();
             }
         }
         else
@@ -91,6 +96,8 @@ public class PlayerStats : MonoBehaviour
             if (m_currentShield >= 0)
             {
                 m_currentShield -= _value;
+                PlayShieldEffect();
+
             }
         }
   
@@ -157,5 +164,13 @@ public class PlayerStats : MonoBehaviour
                 break;
         }
     }
-
+    
+    void PlayBloodEffect()
+    {
+        m_bloodEffect.Play();
+    } 
+    void PlayShieldEffect()
+    {
+        m_shieldEffect.Play();
+    }
 }

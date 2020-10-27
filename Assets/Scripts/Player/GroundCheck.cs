@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Tilemaps;
 public class GroundCheck : MonoBehaviour
 {
     [SerializeField]
     bool m_grounded;
     [SerializeField]
     float m_groundDistance;
+    [SerializeField]
+    GameObject m_objectUnder;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,18 +24,15 @@ public class GroundCheck : MonoBehaviour
     void Check()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, m_groundDistance);
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
-            if (hit.collider.tag.Contains("Platform"))
-            {
                 m_grounded = true;
-            }
-    
-            Debug.DrawRay(transform.position, -Vector2.up);
-
+                Debug.DrawRay(transform.position, -Vector2.up);
         }
-        else m_grounded = false;
-
+        else
+        {
+            m_grounded = false;
+        }
     }
     public bool isGrounded()
     {
@@ -42,5 +41,9 @@ public class GroundCheck : MonoBehaviour
     public void setIsGround(bool _state)
     {
         m_grounded = _state;
+    }
+    public GameObject ObjectUnderPlayer()
+    {
+        return m_objectUnder;
     }
 }

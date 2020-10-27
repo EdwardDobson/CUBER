@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     float m_wallJumpTime;
     [SerializeField]
     float m_maxVelo;
+    ParticleSystem m_jumpParticles;
     // Start is called before the first frame update
     GhostReplay m_replay;
     void Start()
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         m_groundCheck = GetComponent<GroundCheck>();
         m_wallMask = LayerMask.GetMask("Wall");
         m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
+        m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -124,6 +126,9 @@ public class PlayerMovement : MonoBehaviour
         SquishEffectJump();
         m_isJumping = false;
         m_isSliding = false;
+
+        MakeDust();
+
     }
 
     void SquishEffectJump()
@@ -191,10 +196,17 @@ public class PlayerMovement : MonoBehaviour
         {
             m_wallJumping = true;
             Invoke("SetWallJumpingFalse", m_wallJumpTime);
+            MakeDust();
+
         }
     }
     void SetWallJumpingFalse()
     {
         m_wallJumping = false;
+    }
+
+    void MakeDust()
+    {
+        m_jumpParticles.Play();
     }
 }

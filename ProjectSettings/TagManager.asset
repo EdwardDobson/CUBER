@@ -9,6 +9,8 @@ TagManager:
   - DoColourChangePlayer
   - NoColourChangePlayer
   - Wall
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

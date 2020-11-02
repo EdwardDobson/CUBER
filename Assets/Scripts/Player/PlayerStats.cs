@@ -114,6 +114,7 @@ public class PlayerStats : MonoBehaviour
             m_livesText.text = "Lives: " + m_lives;
             m_currentHealth = m_maxHealth;
             m_shouldRespawn = true;
+            GetComponent<PlayerMovement>().RopeReset();
             //Respawn
             Respawn();
         }

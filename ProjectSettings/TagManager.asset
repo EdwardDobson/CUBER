@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Enemy
   - Bullet
+  - Grapple
   layers:
   - Default
   - TransparentFX

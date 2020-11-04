@@ -115,7 +115,6 @@ public class PlayerStats : MonoBehaviour
             m_currentHealth = m_maxHealth;
             m_shouldRespawn = true;
             GetComponent<PlayerMovement>().RopeReset();
-            //Respawn
             Respawn();
         }
         else if(m_lives <= 0)
@@ -123,8 +122,6 @@ public class PlayerStats : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("Game Over");
         }
-
-
     }
     public void Respawn()
     {

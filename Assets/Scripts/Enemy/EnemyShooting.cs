@@ -34,8 +34,6 @@ public class EnemyShooting : MonoBehaviour
         m_player = GameObject.Find("Player").GetComponent<Collider2D>();
         m_shootingParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         DetectPlayer();
@@ -47,17 +45,12 @@ public class EnemyShooting : MonoBehaviour
         foreach(Collider2D c in cols)
         {
             if (c.gameObject.tag.Contains("Player"))
-            {
-
                 m_foundPlayer = true;
-            }
-       
         }
         if (!cols.Contains(m_player))
         {
             m_positions[0] = new Vector3(0, 0, 0);
             m_positions[1] = new Vector3(0, 0, 0);
-
             m_laserEffect.SetPositions(m_positions);
             m_foundPlayer = false;
         }
@@ -65,10 +58,7 @@ public class EnemyShooting : MonoBehaviour
     void Aim()
     {
         if(m_foundPlayer)
-        {
             Attack();
-     
-        }
     }
     void Attack()
     {
@@ -99,7 +89,6 @@ public class EnemyShooting : MonoBehaviour
                             {
                                 Debug.Log("Attack Player Hit Scan Missed");
                             }
-                     
                             break;
                         case FireType.Projectile:
                             SpawnBullet();
@@ -122,9 +111,5 @@ public class EnemyShooting : MonoBehaviour
         GameObject clone = Instantiate(m_bulletPrefab,transform.position,Quaternion.identity);
         clone.GetComponent<Bullet>().SetDirection(-(transform.position - m_player.transform.position).normalized);
         clone.GetComponent<Bullet>().SetDamage(m_shotDamage);
-    }
-    void DrawLaser()
-    {
-
     }
 }

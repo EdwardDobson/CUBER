@@ -26,8 +26,6 @@ public class FollowPlayer : MonoBehaviour
             if(m_doors[i].Active)
             transform.position = m_cameraPositions[m_doors[i].RoomNumber];
         }
-        //  if(Player != null)
-        //    transform.position = new Vector3(Player.position.x , Player.position.y , m_offset.z);
     }
 
 }

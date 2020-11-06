@@ -15,6 +15,7 @@ MonoBehaviour:
   settings:
   - {fileID: 2343835426475745376}
   - {fileID: 6233194975069172522}
+  - {fileID: 2686163621736817802}
 --- !u!114 &2343835426475745376
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -40,7 +41,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 1
+    value: 0
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -60,12 +61,12 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   ldrLut:
-    overrideState: 0
-    value: {fileID: 2800000, guid: ecce4c0f4aff757438f7c7277ff43724, type: 3}
+    overrideState: 1
+    value: {fileID: 2800000, guid: 9f0d32c90729079449525ad349b1fcec, type: 3}
     defaultState: 4
   ldrLutContribution:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0
   temperature:
     overrideState: 0
     value: 0
@@ -92,7 +93,7 @@ MonoBehaviour:
     value: 0
   mixerRedOutRedIn:
     overrideState: 0
-    value: 58.598946
+    value: 0
   mixerRedOutGreenIn:
     overrideState: 0
     value: 0
@@ -104,7 +105,7 @@ MonoBehaviour:
     value: 0
   mixerGreenOutGreenIn:
     overrideState: 0
-    value: 44.43543
+    value: 0
   mixerGreenOutBlueIn:
     overrideState: 0
     value: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
     value: -200
   mixerBlueOutBlueIn:
     overrideState: 0
-    value: 120.70052
+    value: 0
   lift:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
@@ -1326,6 +1327,53 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
+--- !u!114 &2686163621736817802
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: 10
+  threshold:
+    overrideState: 1
+    value: 1
+  softKnee:
+    overrideState: 0
+    value: 0.5
+  clamp:
+    overrideState: 0
+    value: 65472
+  diffusion:
+    overrideState: 0
+    value: 7
+  anamorphicRatio:
+    overrideState: 0
+    value: 0
+  color:
+    overrideState: 0
+    value: {r: 1, g: 1, b: 1, a: 1}
+  fastMode:
+    overrideState: 0
+    value: 0
+  dirtTexture:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  dirtIntensity:
+    overrideState: 0
+    value: 0
 --- !u!114 &6233194975069172522
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1353,7 +1401,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.292
+    value: 0.3
   smoothness:
     overrideState: 1
     value: 0.2

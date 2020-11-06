@@ -255,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
             if (!hit.collider.tag.Contains("Enemy") || !hit.collider.tag.Contains("Bullet") || !hit.collider.tag.Contains("Player"))
             {
                 m_grappleAttached = true;
-                if (!m_ropePositions.Contains(hit.point))
+                if (m_ropePositions.Count < 1)
                 {
                     transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
                     m_ropePositions.Add(hit.point);
@@ -265,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+      
     }
     void ResetRopePositions()
     {

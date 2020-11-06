@@ -48,3 +48,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   ColourVolume: {fileID: 11400000, guid: 4f49e33dc137a9145b78401d421b690b, type: 2}
+  FullscreenToggle: {fileID: 0}
+  AudioSliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  AudioSlidersPaused:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Mixer: {fileID: 24100000, guid: e3a2cefd5ed93c149a46aeb91d517f0c, type: 2}

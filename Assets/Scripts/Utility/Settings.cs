@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
@@ -12,10 +13,25 @@ public class Settings : MonoBehaviour
     public PostProcessProfile ColourVolume;
     public Toggle FullscreenToggle;
     public Slider[] AudioSliders = new Slider[3];
+    public Slider[] AudioSlidersPaused = new Slider[3];
     public AudioMixer Mixer;
     string[] m_audioNames = new string[3] { "Master", "Effects", "Music" };
     string[] m_colourNames = new string[3] { "Red", "Green", "Blue" };
-    
+
+    private static Settings Instance;
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         SetAudioSettings();
@@ -26,13 +42,29 @@ public class Settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.timeScale == 0)
+        {
+            for (int i = 0; i < m_audioNames.Length; ++i)
+            {
+                AudioSlidersPaused[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
+            }
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            for (int i = 0; i < m_audioNames.Length; ++i)
+            {
+                AudioSliders[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
+            }
+        }
     }
     void SetAudioSettings()
     {
-        for(int i = 0; i  < m_audioNames.Length; ++i)
+        for (int i = 0; i < m_audioNames.Length; ++i)
         {
-            AudioSliders[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
+            if (AudioSliders[i] != null)
+                AudioSliders[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
+            if (AudioSlidersPaused[i] !=null)
+            AudioSlidersPaused[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
             Mixer.SetFloat(m_audioNames[i], PlayerPrefs.GetFloat(m_audioNames[i]));
         }
     }

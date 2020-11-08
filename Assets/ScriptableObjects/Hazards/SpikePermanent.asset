@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6109ddcf2b93b3640a7c4aefe8725806, type: 3}
-  m_Name: Fire
+  m_Name: SpikePermanent
   m_EditorClassIdentifier: 
-  Damage: 5
-  MaxCoolDown: 0.2
-  CoolDown: 0.2
-  Uses: 3
-  MaxUses: 3
-  isOverTimeAttack: 1
+  Damage: 2
+  MaxCoolDown: 0
+  CoolDown: 0
+  Uses: 0
+  MaxUses: 0
+  isOverTimeAttack: 0
   infiniteUses: 1

@@ -5,20 +5,24 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class Settings : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Slider[] ColourSliders = new Slider[3];
     public PostProcessProfile ColourVolume;
     public Toggle FullscreenToggle;
     public Slider[] AudioSliders = new Slider[3];
     public Slider[] AudioSlidersPaused = new Slider[3];
+    public Slider ColourBlindIntensitySlider;
+    public Slider ColourBlindIntensitySliderPaused;
     public AudioMixer Mixer;
     string[] m_audioNames = new string[3] { "Master", "Effects", "Music" };
-    string[] m_colourNames = new string[3] { "Red", "Green", "Blue" };
-
+    public PostProcessVolume ColourBlindSettings;
+    public Texture[] Luts;
     private static Settings Instance;
+    public TMP_Dropdown ColourBlindPresetsMain;
+    public TMP_Dropdown ResolutionsMain;
+    public TMP_Dropdown RefreshRatesMain;
+    Resolution[] m_resolutions;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -35,8 +39,11 @@ public class Settings : MonoBehaviour
     void Start()
     {
         SetAudioSettings();
-        SetColourLevels();
-
+        SetColourBlindIntensityLoad();
+        SetColourBlindPresets();
+        GetResolutions();
+        GetRefreshRates();
+        
     }
 
     // Update is called once per frame
@@ -48,6 +55,7 @@ public class Settings : MonoBehaviour
             {
                 AudioSlidersPaused[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
             }
+            SetColourBlindIntensityLoad();
         }
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -56,6 +64,7 @@ public class Settings : MonoBehaviour
                 AudioSliders[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
             }
         }
+   
     }
     void SetAudioSettings()
     {
@@ -68,30 +77,55 @@ public class Settings : MonoBehaviour
             Mixer.SetFloat(m_audioNames[i], PlayerPrefs.GetFloat(m_audioNames[i]));
         }
     }
-    void SetColourLevels()
+    void SetColourBlindPresets()
     {
- 
-        ColourVolume.GetSetting<ColorGrading>().mixerRedOutRedIn.value = PlayerPrefs.GetFloat("Red");
-        ColourVolume.GetSetting<ColorGrading>().mixerGreenOutGreenIn.value = PlayerPrefs.GetFloat("Green");
-        ColourVolume.GetSetting<ColorGrading>().mixerBlueOutBlueIn.value = PlayerPrefs.GetFloat("Blue");
-        for (int i = 0; i < m_colourNames.Length; ++i)
+
+        ColourBlindPresetsMain.options.Clear();
+        ColourBlindPresetsMain.options.Add(new TMP_Dropdown.OptionData() { text = "None" });
+        foreach (Texture t in Luts)
         {
-            ColourSliders[i].value = PlayerPrefs.GetFloat(m_colourNames[i]);
+            ColourBlindPresetsMain.options.Add(new TMP_Dropdown.OptionData() { text = t.name });
+        }
+  
+    }
+   public void SetColourBlindPreset()
+    {
+        if (ColourBlindPresetsMain.value > 0)
+            ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[ColourBlindPresetsMain.value-1];
+        else ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = null;
+    }
+    public void SetResolution()
+    {
+        Screen.SetResolution(m_resolutions[ ResolutionsMain.value].width, m_resolutions[ResolutionsMain.value].height,Screen.fullScreen);
+    }
+    void GetResolutions()
+    {
+        m_resolutions = Screen.resolutions;
+        for (int i = 0; i < m_resolutions.Length; ++i)
+        {
+            if(m_resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+            ResolutionsMain.options.Add(new TMP_Dropdown.OptionData() { text =  "" + m_resolutions[i].width + " X " + m_resolutions[i].height});
         }
     }
-    public void ColourLevels()
+    void GetRefreshRates()
     {
-        if(GameObject.Find("Graphics") != null)
+        List<float> rates = new List<float>();
+        Resolution[] resolutions = Screen.resolutions;
+        for (int i = 0; i < resolutions.Length; ++i)
         {
-            ColourVolume.GetSetting<ColorGrading>().mixerRedOutRedIn.value = ColourSliders[0].value;
-            ColourVolume.GetSetting<ColorGrading>().mixerGreenOutGreenIn.value = ColourSliders[1].value;
-            ColourVolume.GetSetting<ColorGrading>().mixerBlueOutBlueIn.value = ColourSliders[2].value;
-            for(int i = 0; i  < m_colourNames.Length; ++i)
-            {
-                PlayerPrefs.SetFloat(m_colourNames[i], ColourSliders[i].value);
-            }
+            if(!rates.Contains(resolutions[i].refreshRate))
+            rates.Add(resolutions[i].refreshRate); 
         }
-    
+        rates.Sort();
+        for (int i = 0; i < rates.Count; ++i)
+        {
+                RefreshRatesMain.options.Add(new TMP_Dropdown.OptionData() { text = rates[i].ToString() + " hz" });
+        }
+    }
+    void SetColourBlindIntensityLoad()
+    {
+        ColourBlindIntensitySlider.value = PlayerPrefs.GetFloat("ColourBlindIntensity");
+        ColourBlindIntensitySliderPaused.value = PlayerPrefs.GetFloat("ColourBlindIntensity");
     }
     public void Fullscreen()
     {
@@ -114,5 +148,12 @@ public class Settings : MonoBehaviour
     {
         Mixer.SetFloat("Music", _value);
         PlayerPrefs.SetFloat("Music", _value);
+    }
+
+    public void SetColourBlindIntensity(float _value)
+    {
+        PlayerPrefs.SetFloat("ColourBlindIntensity", _value);
+
+        ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLutContribution.value = _value ;
     }
 }

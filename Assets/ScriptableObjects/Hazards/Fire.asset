@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 10
   MaxCoolDown: 2
-  CoolDown: 1.9988856
+  CoolDown: 1.279085
   Uses: 3
   MaxUses: 3
   isOverTimeAttack: 1

@@ -55,6 +55,8 @@ public class PlayerStats : MonoBehaviour
             m_currentShield = 0;
         if (m_currentScore <= 0)
             m_currentScore = 0;
+        if (m_lives >= 3)
+            m_lives = 3;
         Die();
         m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
         m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
@@ -143,6 +145,9 @@ public class PlayerStats : MonoBehaviour
                 break;
             case PickupType.Shield:
                 AddStats(ref m_currentShield, _pickup.GetComponent<Pickup>().PickupObject.Value, m_maxShield,_pickup);
+                break;
+            case PickupType.Lives:
+                AddStats(ref m_lives, _pickup.GetComponent<Pickup>().PickupObject.Value, 3, _pickup);
                 break;
         }
     }

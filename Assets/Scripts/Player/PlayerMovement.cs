@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         m_rb2d = GetComponent<Rigidbody2D>();
         m_groundCheck = GetComponent<GroundCheck>();
         m_wallMask = LayerMask.GetMask("Wall");
-        m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
+      //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
         m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
         m_grappleLine = transform.GetChild(4).GetComponent<LineRenderer>();
         rope.gameObject.SetActive(false);

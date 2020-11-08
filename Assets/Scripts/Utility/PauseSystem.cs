@@ -58,4 +58,8 @@ public class PauseSystem : MonoBehaviour
         Time.timeScale = 1;
         PauseObj.SetActive(false);
     }
+    public bool GetPauseState()
+    {
+        return m_paused;
+    }
 }

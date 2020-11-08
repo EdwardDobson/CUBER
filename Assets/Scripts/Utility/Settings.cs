@@ -20,9 +20,12 @@ public class Settings : MonoBehaviour
     public Texture[] Luts;
     private static Settings Instance;
     public TMP_Dropdown ColourBlindPresetsMain;
+    public TMP_Dropdown ColourBlindPresetsPaused;
     public TMP_Dropdown ResolutionsMain;
     public TMP_Dropdown RefreshRatesMain;
     Resolution[] m_resolutions;
+    List<float> m_rates = new List<float>();
+    PauseSystem m_pauseSystem;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -40,10 +43,11 @@ public class Settings : MonoBehaviour
     {
         SetAudioSettings();
         SetColourBlindIntensityLoad();
+        m_pauseSystem = GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>();
         SetColourBlindPresets();
-        GetResolutions();
-        GetRefreshRates();
-        
+        ColourBlindLoad();
+        //    GetResolutions();
+        //GetRefreshRates();
     }
 
     // Update is called once per frame
@@ -86,17 +90,52 @@ public class Settings : MonoBehaviour
         {
             ColourBlindPresetsMain.options.Add(new TMP_Dropdown.OptionData() { text = t.name });
         }
-  
+        ColourBlindPresetsPaused.options = ColourBlindPresetsMain.options;
     }
    public void SetColourBlindPreset()
     {
-        if (ColourBlindPresetsMain.value > 0)
-            ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[ColourBlindPresetsMain.value-1];
-        else ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = null;
+        if ( !m_pauseSystem.GetPauseState())
+        {
+            if (ColourBlindPresetsMain.value > 0 )
+            {
+                ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[ColourBlindPresetsMain.value - 1];
+            }
+            else
+            {
+                ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = null;
+        
+            }
+            ColourBlindPresetsPaused.value = ColourBlindPresetsMain.value;
+        }
+        else if(m_pauseSystem.GetPauseState() )
+        {
+            if (ColourBlindPresetsPaused.value > 0)
+            {
+                ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[ColourBlindPresetsPaused.value - 1];
+            }
+            else
+            {
+                ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = null;
+            }
+            ColourBlindPresetsMain.value = ColourBlindPresetsPaused.value;
+        }
+   
+        PlayerPrefs.SetInt("ColourBlindPresetValuePaused", ColourBlindPresetsPaused.value);
+        PlayerPrefs.SetInt("ColourBlindPresetValue", ColourBlindPresetsMain.value);
+    }
+    void ColourBlindLoad()
+    {
+        ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[PlayerPrefs.GetInt("ColourBlindPresetValue")];
+        ColourBlindPresetsMain.value = PlayerPrefs.GetInt("ColourBlindPresetValue");
+        ColourBlindPresetsPaused.value = PlayerPrefs.GetInt("ColourBlindPresetValuePaused");
     }
     public void SetResolution()
     {
-        Screen.SetResolution(m_resolutions[ ResolutionsMain.value].width, m_resolutions[ResolutionsMain.value].height,Screen.fullScreen);
+        Screen.SetResolution(m_resolutions[ ResolutionsMain.value].width, m_resolutions[ResolutionsMain.value].height,Screen.fullScreen, (int)m_rates[RefreshRatesMain.value]);
+    }
+    public void SetRefreshRate()
+    {
+        Screen.SetResolution(Screen.currentResolution.width,Screen.currentResolution.height,Screen.fullScreen,(int)m_rates[RefreshRatesMain.value]);
     }
     void GetResolutions()
     {
@@ -109,17 +148,16 @@ public class Settings : MonoBehaviour
     }
     void GetRefreshRates()
     {
-        List<float> rates = new List<float>();
         Resolution[] resolutions = Screen.resolutions;
         for (int i = 0; i < resolutions.Length; ++i)
         {
-            if(!rates.Contains(resolutions[i].refreshRate))
-            rates.Add(resolutions[i].refreshRate); 
+            if(!m_rates.Contains(resolutions[i].refreshRate))
+                m_rates.Add(resolutions[i].refreshRate); 
         }
-        rates.Sort();
-        for (int i = 0; i < rates.Count; ++i)
+        m_rates.Sort();
+        for (int i = 0; i < m_rates.Count; ++i)
         {
-                RefreshRatesMain.options.Add(new TMP_Dropdown.OptionData() { text = rates[i].ToString() + " hz" });
+                RefreshRatesMain.options.Add(new TMP_Dropdown.OptionData() { text = m_rates[i].ToString() + " hz" });
         }
     }
     void SetColourBlindIntensityLoad()

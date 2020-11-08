@@ -22,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform m_frontCheck;
     bool m_grabbedWall;
     bool m_wallSliding;
+    [SerializeField]
     bool m_isJumping;
+    [SerializeField]
     bool m_isSliding;
     [SerializeField]
     float m_wallSlidingSpeed;
@@ -40,18 +42,24 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     GhostReplay m_replay;
     Vector2 m_oldVelo;
-
-    void Start()
+    private void Awake()
     {
         GameObject rope = transform.GetChild(5).gameObject;
-        m_rb2d = GetComponent<Rigidbody2D>();
         m_groundCheck = GetComponent<GroundCheck>();
         m_wallMask = LayerMask.GetMask("Wall");
-      //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
+        //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
         m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
         m_grappleLine = transform.GetChild(4).GetComponent<LineRenderer>();
         rope.gameObject.SetActive(false);
         rope.gameObject.SetActive(true);
+        m_rb2d = GetComponent<Rigidbody2D>();
+        GrappleToPoint();
+        RopeReset();
+    }
+    void Start()
+    {
+   
+  
     }
     void Update()
     {
@@ -155,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
     bool m_grappleAttached;
     LineRenderer m_grappleLine;
     public DistanceJoint2D RopeJoint;
+    [SerializeField]
     List<Vector2> m_ropePositions = new List<Vector2>();
     bool m_distanceSet;
     public Rigidbody2D RopeAnchor;
@@ -184,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (m_ropePositions.Count < 1)
                 {
+                    Debug.Log("Rop Pos: " + m_ropePositions.Count);
                     m_grappleAttached = true;
                     m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
                     m_ropePositions.Add(hit.point);
@@ -195,10 +205,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void ResetRopePositions()
     {
-        if (!m_grappleAttached)
-        {
-            return;
-        }
+ 
         m_grappleLine.positionCount = m_ropePositions.Count + 1;
         for (int i = m_grappleLine.positionCount - 1; i >= 0; --i)
         {

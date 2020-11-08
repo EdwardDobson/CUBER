@@ -43,6 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572219288ca10aa4e912fe55483dd02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColourSliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ColourVolume: {fileID: 11400000, guid: 4f49e33dc137a9145b78401d421b690b, type: 2}
   FullscreenToggle: {fileID: 0}
   AudioSliders:
@@ -53,7 +57,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  ColourBlindIntensitySlider: {fileID: 0}
-  ColourBlindIntensitySliderPaused: {fileID: 0}
   Mixer: {fileID: 24100000, guid: e3a2cefd5ed93c149a46aeb91d517f0c, type: 2}
-  ColourBlindSettings: {fileID: 0}

@@ -62,11 +62,11 @@ MonoBehaviour:
     value: 1
   ldrLut:
     overrideState: 1
-    value: {fileID: 0}
+    value: {fileID: 2800000, guid: 9f0d32c90729079449525ad349b1fcec, type: 3}
     defaultState: 4
   ldrLutContribution:
     overrideState: 1
-    value: 1
+    value: 0
   temperature:
     overrideState: 0
     value: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     value: 0
   mixerRedOutRedIn:
     overrideState: 0
-    value: 58.598946
+    value: 0
   mixerRedOutGreenIn:
     overrideState: 0
     value: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     value: 0
   mixerGreenOutGreenIn:
     overrideState: 0
-    value: 44.43543
+    value: 0
   mixerGreenOutBlueIn:
     overrideState: 0
     value: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
     value: -200
   mixerBlueOutBlueIn:
     overrideState: 0
-    value: 120.70052
+    value: 0
   lift:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
@@ -1345,7 +1345,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 5
+    value: 10
   threshold:
     overrideState: 1
     value: 1

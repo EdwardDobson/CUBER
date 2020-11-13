@@ -26,6 +26,7 @@ public class Settings : MonoBehaviour
     Resolution[] m_resolutions;
     List<float> m_rates = new List<float>();
     PauseSystem m_pauseSystem;
+    GameObject m_ui;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -46,6 +47,7 @@ public class Settings : MonoBehaviour
         m_pauseSystem = GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>();
         SetColourBlindPresets();
         ColourBlindLoad();
+        m_ui = transform.GetChild(0).gameObject;
         //    GetResolutions();
         //GetRefreshRates();
     }
@@ -67,6 +69,11 @@ public class Settings : MonoBehaviour
             {
                 AudioSliders[i].value = PlayerPrefs.GetFloat(m_audioNames[i]);
             }
+            m_ui.SetActive(false);
+        }
+        else
+        {
+            m_ui.SetActive(true);
         }
    
     }

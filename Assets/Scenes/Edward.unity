@@ -41160,7 +41160,6 @@ GameObject:
   - component: {fileID: 951424904}
   - component: {fileID: 951424903}
   - component: {fileID: 951424902}
-  - component: {fileID: 951424905}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -41233,21 +41232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &951424905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951424901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54c0951922a1ee41b0b81bfb933c4c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 759665240}
-  m_offset: {x: 0, y: 0, z: -5}
-  m_cameraPositions: []
 --- !u!1 &952467215
 GameObject:
   m_ObjectHideFlags: 0
@@ -45436,7 +45420,7 @@ PrefabInstance:
       objectReference: {fileID: 950204171}
     - target: {fileID: 1750649124083297952, guid: 5e8f090e99f9cd24f89963d6892c5e40, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1750649124083297955, guid: 5e8f090e99f9cd24f89963d6892c5e40, type: 3}
       propertyPath: m_Name
@@ -45986,6 +45970,26 @@ PrefabInstance:
     - target: {fileID: 7374517359758440170, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_Mass
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_Size.x
+      value: 0.16017151
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00006198883
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.15927124
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440172, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_LocalPosition.x

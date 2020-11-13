@@ -15,7 +15,7 @@ MonoBehaviour:
   Damage: 2
   MaxCoolDown: 0
   CoolDown: 0
-  Uses: 0
-  MaxUses: 0
+  Uses: 100
+  MaxUses: 100
   isOverTimeAttack: 0
   infiniteUses: 1

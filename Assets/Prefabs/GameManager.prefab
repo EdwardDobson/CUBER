@@ -57,3 +57,16 @@ MonoBehaviour:
   ColourBlindIntensitySliderPaused: {fileID: 0}
   Mixer: {fileID: 24100000, guid: e3a2cefd5ed93c149a46aeb91d517f0c, type: 2}
   ColourBlindSettings: {fileID: 0}
+  Luts:
+  - {fileID: 2800000, guid: ecce4c0f4aff757438f7c7277ff43724, type: 3}
+  - {fileID: 2800000, guid: 77768cbc5126c6040a636987b4af4a69, type: 3}
+  - {fileID: 2800000, guid: 0974f9d154c2d0a478878697a63f80f8, type: 3}
+  - {fileID: 2800000, guid: fce22cdefb892904c85a41442600a292, type: 3}
+  - {fileID: 2800000, guid: 133da6d97f7f66a40a6ce6fc587e7f8b, type: 3}
+  - {fileID: 2800000, guid: 362c3263dbc60d645b01ff8178b40556, type: 3}
+  - {fileID: 2800000, guid: 9f0d32c90729079449525ad349b1fcec, type: 3}
+  - {fileID: 2800000, guid: 5440990ff33a3344f8590a2d8794b398, type: 3}
+  ColourBlindPresetsMain: {fileID: 0}
+  ColourBlindPresetsPaused: {fileID: 0}
+  ResolutionsMain: {fileID: 0}
+  RefreshRatesMain: {fileID: 0}

@@ -194,4 +194,8 @@ public class Settings : MonoBehaviour
 
         ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLutContribution.value = _value ;
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

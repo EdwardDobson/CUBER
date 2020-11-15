@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
    
         }
         Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, GetComponent<BoxCollider2D>().size,360f);
-        Collider2D t = col.Where(c => !c.tag.Contains("Player") && !c.tag.Contains("Enemy") && !c.tag.Contains("Bullet")).FirstOrDefault();
+        Collider2D t = col.Where(c => !c.tag.Contains("Player") && !c.tag.Contains("Enemy") && !c.tag.Contains("Bullet") && !c.tag.Contains("Room")).FirstOrDefault();
         if(t != null)
         {
             Destroy(gameObject);

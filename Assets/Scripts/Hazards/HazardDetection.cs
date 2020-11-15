@@ -13,14 +13,13 @@ public class HazardDetection : MonoBehaviour
         if(collision.tag.Contains("Player"))
         {
             m_player = collision.gameObject;
-        
+            m_player.GetComponent<PlayerStats>().TakeDamage(Hazard.Damage);
             if (Hazard.isOverTimeAttack)
             {
                 m_startCoolDown = true;
             }
-            else
+            else if(!Hazard.infiniteUses)
             {
-                m_player.GetComponent<PlayerStats>().TakeDamage(Hazard.Damage);
                 Destroy(gameObject);
             }
         }
@@ -46,7 +45,7 @@ public class HazardDetection : MonoBehaviour
                 m_player.GetComponent<PlayerStats>().TakeDamage(Hazard.Damage);
                 Hazard.CoolDown = Hazard.MaxCoolDown;
             }    
-            if (Hazard.Uses <= 0)
+            if (Hazard.Uses <= 0 && !Hazard.infiniteUses)
             {
                 Hazard.CoolDown = Hazard.MaxCoolDown;
                 Hazard.Uses = Hazard.MaxUses;

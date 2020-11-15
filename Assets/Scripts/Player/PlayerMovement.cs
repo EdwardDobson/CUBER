@@ -191,14 +191,20 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hit.collider.tag.Contains("Enemy") || !hit.collider.tag.Contains("Bullet") || !hit.collider.tag.Contains("Player"))
             {
-                if (m_ropePositions.Count < 1)
+                if (!hit.collider.tag.Contains("Room"))
                 {
-                    m_grappleAttached = true;
-                    m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-                    m_ropePositions.Add(hit.point);
-                    RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
-                    RopeJoint.enabled = true;
+                    if (m_ropePositions.Count < 1)
+                    {
+                        m_grappleAttached = true;
+                        m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                        m_ropePositions.Add(hit.point);
+                        RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
+                        RopeJoint.enabled = true;
+                        Debug.Log(hit.collider.name);
+                    }
                 }
+         
+      
             }
         }
     }

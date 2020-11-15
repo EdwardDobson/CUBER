@@ -71,7 +71,7 @@ public class EnemyShooting : MonoBehaviour
 
         if (hit.collider !=null)
         {
-            if(hit.transform.gameObject.tag.Contains("Player"))
+            if(hit.transform.gameObject.tag.Contains("Player") && !hit.transform.gameObject.tag.Contains("Room"))
             {
                 m_laserEffect.SetPositions(m_positions);
                 m_currentFireRate -= Time.deltaTime;

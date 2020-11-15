@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Spike
   m_EditorClassIdentifier: 
   Damage: 1
-  MaxCoolDown: 0
-  CoolDown: 0
-  Uses: 0
-  MaxUses: 0
+  MaxCoolDown: 1
+  CoolDown: 0.98101324
+  Uses: 1
+  MaxUses: 1
   isOverTimeAttack: 0
-  infiniteUses: 0
+  infiniteUses: 1

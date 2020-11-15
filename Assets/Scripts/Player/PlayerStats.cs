@@ -37,6 +37,7 @@ public class PlayerStats : MonoBehaviour
     {
         m_currentScore = m_maxScore;
         m_currentHealth = m_maxHealth;
+        if(GameObject.Find("GameManager")!= null)
         m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
         if(m_ui != null)
         {
@@ -49,6 +50,7 @@ public class PlayerStats : MonoBehaviour
             m_uiKeysText = m_ui.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             m_livesText.text = "Lives: " + m_lives;
         }
+        if (GameObject.Find("GameManager") != null)
             m_gameOverScreen = GameObject.Find("GameManager").transform.GetChild(1).gameObject;
         m_spawnLocation = transform.position;
         m_bloodEffect = transform.GetChild(2).GetComponent<ParticleSystem>();

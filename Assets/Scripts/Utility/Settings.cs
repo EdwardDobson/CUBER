@@ -23,10 +23,13 @@ public class Settings : MonoBehaviour
     public TMP_Dropdown ColourBlindPresetsPaused;
     public TMP_Dropdown ResolutionsMain;
     public TMP_Dropdown RefreshRatesMain;
+    public AudioSource Source;
     Resolution[] m_resolutions;
     List<float> m_rates = new List<float>();
     PauseSystem m_pauseSystem;
     GameObject m_ui;
+    [SerializeField]
+    object[] m_effectClips;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -48,10 +51,26 @@ public class Settings : MonoBehaviour
         SetColourBlindPresets();
         ColourBlindLoad();
         m_ui = transform.GetChild(0).gameObject;
+        LoadClips();
         //    GetResolutions();
         //GetRefreshRates();
     }
 
+    void LoadClips()
+    {
+        m_effectClips = Resources.LoadAll("AudioClips/Effects/", typeof(AudioClip));
+    }
+    AudioClip MatchAudioClip(AudioClip _clip)
+    {
+        foreach(AudioClip clip in m_effectClips)
+        {
+            if(_clip.name == clip.name)
+            {
+                Source.outputAudioMixerGroup = Mixer.FindMatchingGroups("Effects")[0];
+            }
+        }
+        return _clip;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -198,7 +217,6 @@ public class Settings : MonoBehaviour
         Mixer.SetFloat("Music", _value);
         PlayerPrefs.SetFloat("Music", _value);
     }
-
     public void SetColourBlindIntensity(float _value)
     {
         PlayerPrefs.SetFloat("ColourBlindIntensity", _value);
@@ -208,5 +226,14 @@ public class Settings : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void SetAudioClipGroup( AudioMixerGroup _group)
+    {
+        Source.outputAudioMixerGroup = _group;
+    }
+    public void PlayButtonSound(AudioClip _clip)
+    {
+        Source.clip = MatchAudioClip(_clip);
+        Source.Play();
     }
 }

@@ -33,6 +33,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if(scene.buildIndex > 1)
         {
+            m_cameraPositions.Clear();
             Player = GameObject.Find("Player").transform;
             Transform cameraPoints = GameObject.Find("CameraPoints").transform;
             foreach (Transform t in cameraPoints)

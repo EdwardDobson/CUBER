@@ -20,13 +20,6 @@ public class EnemyWalk : MonoBehaviour
     void Start()
     {
         m_player = GameObject.Find("Player").GetComponent<PlayerStats>();
-      GameObject g =  GameObject.Find("WalkingEnemyPoints");
-        Points.Add(transform.position);
-        foreach (Transform t in g.transform)
-        {
-            if(t.gameObject.name.Contains(gameObject.name))
-            Points.Add(t.position);
-        }
         m_currentAttackSpeed = m_maxAttackSpeed;
     }
 

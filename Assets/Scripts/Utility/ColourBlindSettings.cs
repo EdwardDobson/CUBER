@@ -17,8 +17,8 @@ public class ColourBlindSettings : MonoBehaviour
         m_gameObjectsinScene = FindObjectsOfType<SpriteRenderer>();
         foreach (SpriteRenderer go in m_gameObjectsinScene)
         {
-            if(go.gameObject.tag.Contains("DoColourChange"))
-            PickPresetColour(go, _obj);
+            if (go.gameObject.tag.Contains("DoColourChange"))
+                PickPresetColour(go, _obj);
         }
     }
     public void PickPresetColour(SpriteRenderer _renderer, ColourBlindBase _obj)

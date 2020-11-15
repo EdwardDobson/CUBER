@@ -22,10 +22,15 @@ public class PlayerStats : MonoBehaviour
     GameObject m_ui;
     TextMeshProUGUI m_livesText;
     TextMeshProUGUI m_scoreText;
+    TextMeshProUGUI m_uiKeysText;
     bool m_shouldRespawn;
     Vector3 m_spawnLocation;
     ParticleSystem m_bloodEffect;
     ParticleSystem m_shieldEffect;
+    int m_orangeKeyTotal;
+    int m_purpleKeyTotal;
+    int m_whiteKeyTotal;
+    bool m_inDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,7 @@ public class PlayerStats : MonoBehaviour
         m_spawnLocation = transform.position;
         m_bloodEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
         m_shieldEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
+        m_uiKeysText = GameObject.Find("UI").transform.GetChild(5).GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -57,10 +63,11 @@ public class PlayerStats : MonoBehaviour
             m_currentScore = 0;
         if (m_lives >= 3)
             m_lives = 3;
+        Debug.Log("Key Total: " + m_whiteKeyTotal);
         Die();
         m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
         m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
-
+        InDoorCheck();
         m_scoreText.text = "Score: " + m_currentScore;
     }
     public void AddStats(ref int _valueToIncrease,  int _valueForIncrease, int _maxValue = 0, GameObject _pickup = null)
@@ -118,6 +125,7 @@ public class PlayerStats : MonoBehaviour
             m_shouldRespawn = true;
             GetComponent<PlayerMovement>().RopeReset();
             Respawn();
+            GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, GetComponent<SpriteRenderer>().color.a / 2);
         }
         else if(m_lives <= 0)
         {
@@ -149,10 +157,20 @@ public class PlayerStats : MonoBehaviour
             case PickupType.Lives:
                 AddStats(ref m_lives, _pickup.GetComponent<Pickup>().PickupObject.Value, 3, _pickup);
                 break;
+            case PickupType.WhiteKey:
+                AddStats(ref m_whiteKeyTotal, _pickup.GetComponent<Pickup>().PickupObject.Value, 0, _pickup);
+                break;
+            case PickupType.PurpleKey:
+                AddStats(ref m_purpleKeyTotal, _pickup.GetComponent<Pickup>().PickupObject.Value, 0, _pickup);
+                break;
+            case PickupType.OrangeKey:
+                AddStats(ref m_orangeKeyTotal, _pickup.GetComponent<Pickup>().PickupObject.Value, 0, _pickup);
+                break;
+
         }
     }
     //A function used for calling applying negative pickup values
-    public void ReduceStats(PickupType _type, GameObject _pickup)
+    public void ReduceStats(PickupType _type, GameObject _pickup = null)
     {
         switch (_type)
         {
@@ -165,6 +183,15 @@ public class PlayerStats : MonoBehaviour
             case PickupType.Shield:
                 ReduceStatValue(ref m_currentShield, _pickup.GetComponent<Pickup>().PickupObject.Value, m_maxScore, _pickup);
                 break;
+            case PickupType.WhiteKey:
+                ReduceStatValue(ref m_whiteKeyTotal, 1);
+                break;
+            case PickupType.PurpleKey:
+                ReduceStatValue(ref m_purpleKeyTotal, 1);
+                break;
+            case PickupType.OrangeKey:
+                ReduceStatValue(ref m_orangeKeyTotal, 1);
+                break;
         }
     }
     
@@ -175,5 +202,81 @@ public class PlayerStats : MonoBehaviour
     void PlayShieldEffect()
     {
         m_shieldEffect.Play();
+    }
+    public int GetKeyTotal(PickupType _type)
+    {
+        int v = 0;
+        switch (_type)
+        {
+            case PickupType.OrangeKey:
+                v = m_orangeKeyTotal;
+                break;
+            case PickupType.WhiteKey:
+                 v = m_whiteKeyTotal;
+                Debug.Log("Key Total: " + v);
+                break;
+            case PickupType.PurpleKey:
+                v =  m_purpleKeyTotal;
+                break;
+            default:
+                break;
+        }
+
+        return v;
+    }
+    void InDoorCheck()
+    {
+        if (m_inDoor)
+        {
+            m_uiKeysText.text = "Need more keys";
+            Debug.Log("Door in");
+        }
+        else
+        {
+            m_uiKeysText.text = "";
+            Debug.Log("Door exit");
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.name.Contains("DoorToOpen"))
+        {
+            m_inDoor = true;
+            switch (collision.GetComponent<DoorOpen>().doorColour)
+            {
+                case DoorColour.Orange:
+                    if (m_orangeKeyTotal > 0)
+                    {
+                        m_orangeKeyTotal -= 1;
+                        collision.gameObject.SetActive(false);
+                    }
+                    break;
+                case DoorColour.Purple:
+                    if (m_purpleKeyTotal > 0)
+                    {
+                        m_purpleKeyTotal -= 1;
+                        collision.gameObject.SetActive(false);
+                    }
+
+                    break;
+                case DoorColour.White:
+
+                    if (m_whiteKeyTotal > 0)
+                    {
+                        m_whiteKeyTotal -= 1;
+                        collision.gameObject.SetActive(false);
+                    }
+                    break;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("DoorToOpen"))
+        {
+            m_inDoor = false;
+            m_uiKeysText.text = "";
+        
+        }
     }
 }

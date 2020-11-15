@@ -5,6 +5,9 @@ public enum PickupType
     Score,
     Shield,
     Lives,
+    OrangeKey,
+    PurpleKey,
+    WhiteKey
 }
 [CreateAssetMenu(fileName = "Pickup", menuName = "Pickup", order = 1)]
 public class BasePickup : ScriptableObject

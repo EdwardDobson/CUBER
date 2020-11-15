@@ -68,11 +68,12 @@ public class EnemyShooting : MonoBehaviour
         m_positions[0] = transform.position;
         m_positions[1] = m_player.transform.position;
         float RandomMiss = Random.Range(0, missFactor);
-        m_laserEffect.SetPositions(m_positions);
+
         if (hit.collider !=null)
         {
             if(hit.transform.gameObject.tag.Contains("Player"))
             {
+                m_laserEffect.SetPositions(m_positions);
                 m_currentFireRate -= Time.deltaTime;
                 if(m_currentFireRate <= 0)
                 {
@@ -103,6 +104,9 @@ public class EnemyShooting : MonoBehaviour
             else
             {
                 m_currentFireRate = m_maxFireRate;
+                m_positions[0] = new Vector3(0, 0, 0);
+                m_positions[1] = new Vector3(0, 0, 0);
+                m_laserEffect.SetPositions(m_positions);
             }
         }
     }

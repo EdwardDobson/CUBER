@@ -41,8 +41,6 @@ public class FollowPlayer : MonoBehaviour
             }
             transform.position = m_cameraPositions[0];
             m_doors = FindObjectsOfType<Door>();
-            Debug.Log("OnSceneLoaded: " + scene.name);
-            Debug.Log(mode);
         }
 
     }

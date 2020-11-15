@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum RotateDirection
 {
+    None,
     Right,
     Left,
 }
@@ -26,6 +27,10 @@ public class Rotate : MonoBehaviour
                 break;
             case RotateDirection.Right:
                 transform.Rotate(Vector3.back, 45 * Time.deltaTime * Speed);
+                break;
+            case RotateDirection.None:
+                break;
+            default:
                 break;
         }
   

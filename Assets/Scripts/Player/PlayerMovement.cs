@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
     #region Grapple Code
     [SerializeField]
     float m_grappleRange;
-    bool m_grappleAttached;
+    bool m_grappleAttached = false;
     LineRenderer m_grappleLine;
     public DistanceJoint2D RopeJoint;
     [SerializeField]
@@ -193,7 +193,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (m_ropePositions.Count < 1)
                 {
-                    Debug.Log("Rop Pos: " + m_ropePositions.Count);
                     m_grappleAttached = true;
                     m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
                     m_ropePositions.Add(hit.point);

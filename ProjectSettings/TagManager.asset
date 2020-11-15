@@ -12,6 +12,8 @@ TagManager:
   - Enemy
   - Bullet
   - Grapple
+  - LaserTrap
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - Level
   - Wall
   - Door
-  - 
-  - 
+  - Room
+  - Player
   - 
   - 
   - 

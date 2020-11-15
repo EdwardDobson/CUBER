@@ -8,7 +8,7 @@ public class GhostReplay : MonoBehaviour
     List<Vector2> m_playerPositions = new List<Vector2>();
     Coroutine m_moveIE;
     [SerializeField]
-    float m_speed;
+    float m_speed = 0;
     [SerializeField]
     float m_addPosTimerMax;
     float m_addPosTimerCurrent;

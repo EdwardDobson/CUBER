@@ -34,4 +34,9 @@ public class ExitLevel : MonoBehaviour
             yield return null;
         }
     }
+    public void RestartLevel()
+    {
+        StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex));
+    }
+ 
 }

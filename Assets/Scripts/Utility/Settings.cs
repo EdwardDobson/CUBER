@@ -63,7 +63,7 @@ public class Settings : MonoBehaviour
             }
             SetColourBlindIntensityLoad();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 0)
+        if(SceneManager.GetActiveScene().buildIndex <= 1)
         {
             for (int i = 0; i < m_audioNames.Length; ++i)
             {
@@ -126,15 +126,19 @@ public class Settings : MonoBehaviour
             }
             ColourBlindPresetsMain.value = ColourBlindPresetsPaused.value;
         }
-   
+
         PlayerPrefs.SetInt("ColourBlindPresetValuePaused", ColourBlindPresetsPaused.value);
         PlayerPrefs.SetInt("ColourBlindPresetValue", ColourBlindPresetsMain.value);
     }
     void ColourBlindLoad()
     {
-        ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[PlayerPrefs.GetInt("ColourBlindPresetValue")];
-        ColourBlindPresetsMain.value = PlayerPrefs.GetInt("ColourBlindPresetValue");
-        ColourBlindPresetsPaused.value = PlayerPrefs.GetInt("ColourBlindPresetValuePaused");
+        if(PlayerPrefs.GetInt("ColourBlindPresetValue") > 0)
+        {
+            ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLut.value = Luts[PlayerPrefs.GetInt("ColourBlindPresetValue") - 1];
+            ColourBlindPresetsMain.value = PlayerPrefs.GetInt("ColourBlindPresetValue");
+            ColourBlindPresetsPaused.value = PlayerPrefs.GetInt("ColourBlindPresetValuePaused");
+        }
+
     }
     public void SetResolution()
     {

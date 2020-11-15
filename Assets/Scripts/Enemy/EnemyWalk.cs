@@ -14,7 +14,7 @@ public class EnemyWalk : MonoBehaviour
     bool m_nearPlayer;
     PlayerStats m_player;
     [SerializeField]
-    float m_maxAttackSpeed;
+    float m_maxAttackSpeed = 0;
     float m_currentAttackSpeed;
     // Start is called before the first frame update
     void Start()

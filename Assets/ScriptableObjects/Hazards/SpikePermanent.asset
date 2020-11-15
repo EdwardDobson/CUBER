@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SpikePermanent
   m_EditorClassIdentifier: 
   Damage: 2
-  MaxCoolDown: 0
-  CoolDown: 0
+  MaxCoolDown: 1
+  CoolDown: 0.998515
   Uses: 100
   MaxUses: 100
-  isOverTimeAttack: 0
+  isOverTimeAttack: 1
   infiniteUses: 1

@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         MoveInput();
         if (m_horizontal < 0)
-            m_frontCheck.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+            m_frontCheck.position = new Vector2(transform.position.x - 0.10f, transform.position.y);
         else
             m_frontCheck.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
         Squish();
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
                 m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
             else
             {
-                if (m_oldVelo.x < 0)
+                if (m_oldVelo.x < 0 )
                     m_rb2d.velocity = new Vector2(-m_oldVelo.x * m_horizontal, m_yWallForce);
                 else
                     m_rb2d.velocity = new Vector2(m_oldVelo.x * m_horizontal, m_yWallForce);
@@ -148,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke("SetWallJumpingFalse", m_wallJumpTime);
             MakeDust();
         }
+
     }
     void SetWallJumpingFalse()
     {
@@ -189,7 +190,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, m_grappleRange);
         if (hit.collider != null)
         {
-            if (!hit.collider.tag.Contains("Enemy") || !hit.collider.tag.Contains("Bullet") || !hit.collider.tag.Contains("Player"))
+            if (!hit.collider.tag.Contains("Enemy") || !hit.collider.tag.Contains("Bullet") || !hit.collider.tag.Contains("Player") || !hit.collider.tag.Contains("Score") || !hit.collider.tag.Contains("Laser")
+                || !hit.collider.tag.Contains("MovingPlatform"))
             {
                 if (!hit.collider.tag.Contains("Room"))
                 {
@@ -200,17 +202,14 @@ public class PlayerMovement : MonoBehaviour
                         m_ropePositions.Add(hit.point);
                         RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
                         RopeJoint.enabled = true;
-                        Debug.Log(hit.collider.name);
                     }
                 }
-         
-      
+        
             }
         }
     }
     void ResetRopePositions()
     {
- 
         m_grappleLine.positionCount = m_ropePositions.Count + 1;
         for (int i = m_grappleLine.positionCount - 1; i >= 0; --i)
         {

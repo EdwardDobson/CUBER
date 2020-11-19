@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7670007295878827248}
   m_Layer: 0
   m_Name: MultipleLaser
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 7670007296048197745}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 7670007296424786339}
   m_Layer: 0
   m_Name: SpriteVisuals 2
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 7670007296486090865}
   m_Layer: 0
   m_Name: SpriteVisuals 3
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 7670007296494371996}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 7670007296791213882}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 7670007296853647946}
   m_Layer: 0
   m_Name: SpriteVisuals 5
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -783,7 +783,7 @@ GameObject:
   - component: {fileID: 7670007296941000448}
   m_Layer: 0
   m_Name: SpriteVisuals 4
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 7670007297182140660}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 7670007297230572779}
   m_Layer: 0
   m_Name: SpriteVisuals 6
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1087,7 +1087,7 @@ GameObject:
   - component: {fileID: 7670007297591330510}
   m_Layer: 0
   m_Name: SpriteVisuals1
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 7670007297695482541}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 7670007297752986328}
   m_Layer: 0
   m_Name: LaserVisuals
-  m_TagString: Untagged
+  m_TagString: LaserTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

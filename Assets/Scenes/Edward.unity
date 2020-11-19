@@ -37462,7 +37462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7670007295878827250, guid: 40692fd95a3edf04198870fbf20cfb9c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.498601
+      value: -2.81
       objectReference: {fileID: 0}
     - target: {fileID: 7670007295878827250, guid: 40692fd95a3edf04198870fbf20cfb9c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38917,6 +38917,10 @@ PrefabInstance:
     - target: {fileID: 3542100009954463063, guid: 3144e16fd2484d145bb2e38a348d1b8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542100010125717873, guid: 3144e16fd2484d145bb2e38a348d1b8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3144e16fd2484d145bb2e38a348d1b8a, type: 3}
@@ -40943,7 +40947,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8c1fe77260dd6234cab4a02baa877f1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

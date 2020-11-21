@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SmallerTile
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 8c1fe77260dd6234cab4a02baa877f1f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.5667062, b: 0.031772893, a: 1}
   m_Transform:
     e00: 1
     e01: 0

@@ -2722,6 +2722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPickupExample (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4285616810043955478, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
+      propertyPath: m_TagString
+      value: Health
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
 --- !u!1 &225423982
@@ -4666,6 +4670,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldPickupExample (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
 --- !u!1001 &387943964
@@ -4847,6 +4855,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPickupExample (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4285616810043955478, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
+      propertyPath: m_TagString
+      value: Health
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
 --- !u!1001 &388794047
@@ -4903,6 +4915,10 @@ PrefabInstance:
     - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
       propertyPath: m_Name
       value: ShieldPickupExample (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
@@ -31295,6 +31311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldPickupExample (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
 --- !u!1001 &503055524
@@ -31949,6 +31969,10 @@ PrefabInstance:
     - target: {fileID: 4285616810043955478, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
       propertyPath: m_Name
       value: HealthPickupExample (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285616810043955478, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
+      propertyPath: m_TagString
+      value: Health
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
@@ -34762,6 +34786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPickupExample (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4285616810043955478, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
+      propertyPath: m_TagString
+      value: Health
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9045d532184c8447bb6c0908c84bbb8, type: 3}
 --- !u!1001 &829208008
@@ -35829,6 +35857,10 @@ PrefabInstance:
     - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
       propertyPath: m_Name
       value: ShieldPickupExample (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
@@ -38572,6 +38604,10 @@ PrefabInstance:
     - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
       propertyPath: m_Name
       value: ShieldPickupExample (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
@@ -41939,6 +41975,10 @@ PrefabInstance:
     - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
       propertyPath: m_Name
       value: ShieldPickupExample (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669866492622508796, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16c651ee6e19784b954e721e095b4d9, type: 3}
@@ -48536,15 +48576,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3870319059550713535, guid: bd0a845bf45fce549aaecb8eaec32954, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.316
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3870319059550713535, guid: bd0a845bf45fce549aaecb8eaec32954, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.316
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3870319059550713535, guid: bd0a845bf45fce549aaecb8eaec32954, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.316
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd0a845bf45fce549aaecb8eaec32954, type: 3}
@@ -51824,6 +51864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 7374517360099249155}
+  Clips:
+  - {fileID: 8300000, guid: fca9fb2e64cf1774dae4a270e18702d5, type: 3}
+  - {fileID: 8300000, guid: fc3a08f183cc530458a594e6a2834b23, type: 3}
+  - {fileID: 8300000, guid: bdb07a0a0b8342448afcc1a6f80bd5bf, type: 3}
 --- !u!483693784 &7403280522505442041
 TilemapRenderer:
   m_ObjectHideFlags: 1

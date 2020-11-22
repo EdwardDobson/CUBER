@@ -16,6 +16,8 @@ TagManager:
   - Room
   - Score
   - MovingPlatform
+  - Shield
+  - Health
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class PauseSystem : MonoBehaviour
 {
     bool m_paused;
     public GameObject PauseObj;
-
+    public bool CanPause;
     private static PauseSystem Instance;
     void Awake()
     {
@@ -31,7 +31,7 @@ public class PauseSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        if(SceneManager.GetActiveScene().buildIndex != 0 && CanPause)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && !m_paused)
             {

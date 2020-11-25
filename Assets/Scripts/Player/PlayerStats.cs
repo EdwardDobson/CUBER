@@ -320,6 +320,14 @@ public class PlayerStats : MonoBehaviour
     {
         return m_maxShield;
     }
+    public int GetScore()
+    {
+        return m_currentScore;
+    }
+    public int AddToScore(int _value)
+    {
+        return m_currentScore += _value;
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("DoorToOpen"))

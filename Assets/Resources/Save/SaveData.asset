@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801a5491f42a299448f03cac6bc6a0ef, type: 3}
+  m_Name: SaveData
+  m_EditorClassIdentifier: 
+  datas:
+  - Score: 12
+    StarCount: 2
+  - Score: 11
+    StarCount: 2
+  - Score: 10
+    StarCount: 2
+  - Score: 9
+    StarCount: 2
+  - Score: 8
+    StarCount: 1
+  - Score: 7
+    StarCount: 0
+  - Score: 6
+    StarCount: 0
+  - Score: 5
+    StarCount: 2
+  - Score: 4
+    StarCount: 1
+  - Score: 3
+    StarCount: 1

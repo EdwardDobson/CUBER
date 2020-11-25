@@ -45,13 +45,11 @@ public class Bullet : MonoBehaviour
                 hit.transform.GetComponent<PlayerStats>().TakeDamage(m_damage);
                 Destroy(gameObject);
             }
-   
-        }
-        Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, GetComponent<BoxCollider2D>().size,360f);
-        Collider2D t = col.Where(c => !c.tag.Contains("Player") && !c.tag.Contains("Enemy") && !c.tag.Contains("Bullet") && !c.tag.Contains("Room")).FirstOrDefault();
-        if(t != null)
-        {
-            Destroy(gameObject);
+            if (hit.collider.gameObject.tag.Contains("Wall"))
+            {
+                Destroy(gameObject);
+            }
+
         }
     }
     public void SetDamage(int _value)

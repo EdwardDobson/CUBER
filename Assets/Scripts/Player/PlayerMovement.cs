@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float m_wallJumpTime;
     ParticleSystem m_jumpParticles;
+    ParticleSystem m_grappleParticles;
+    ParticleSystem m_grappleHitParticles;
     // Start is called before the first frame update
     GhostReplay m_replay;
     Vector2 m_oldVelo;
@@ -49,17 +51,14 @@ public class PlayerMovement : MonoBehaviour
         m_wallMask = LayerMask.GetMask("Wall");
         //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
         m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
+        m_grappleParticles = transform.GetChild(6).GetComponent<ParticleSystem>();
+        m_grappleHitParticles = transform.GetChild(7).GetComponent<ParticleSystem>();
         m_grappleLine = transform.GetChild(4).GetComponent<LineRenderer>();
         rope.gameObject.SetActive(false);
         rope.gameObject.SetActive(true);
         m_rb2d = GetComponent<Rigidbody2D>();
         GrappleToPoint();
         RopeReset();
-    }
-    void Start()
-    {
-   
-  
     }
     void Update()
     {
@@ -170,8 +169,11 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D RopeAnchor;
     void RunGrapple()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             GrappleToPoint();
+
+        }
         if (Input.GetKeyUp(KeyCode.Q))
             RopeReset();
         ResetRopePositions();
@@ -190,11 +192,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, m_grappleRange);
         if (hit.collider != null)
         {
-            if (!hit.collider.tag.Contains("Enemy") || !hit.collider.tag.Contains("Bullet") || !hit.collider.tag.Contains("Player") || !hit.collider.tag.Contains("Score") || !hit.collider.tag.Contains("Laser")
-                || !hit.collider.tag.Contains("MovingPlatform"))
+            if (hit.collider.tag.Contains("Grapple") || hit.collider.tag.Contains("Wall"))
             {
-                if (!hit.collider.tag.Contains("Room"))
-                {
                     if (m_ropePositions.Count < 1)
                     {
                         m_grappleAttached = true;
@@ -202,15 +201,17 @@ public class PlayerMovement : MonoBehaviour
                         m_ropePositions.Add(hit.point);
                         RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
                         RopeJoint.enabled = true;
-                    }
+                        m_grappleParticles.Play();
+                        m_grappleHitParticles.gameObject.transform.position = hit.point;
+                        m_grappleHitParticles.Play();
                 }
-        
             }
         }
     }
     void ResetRopePositions()
     {
         m_grappleLine.positionCount = m_ropePositions.Count + 1;
+       
         for (int i = m_grappleLine.positionCount - 1; i >= 0; --i)
         {
             if (i != m_grappleLine.positionCount - 1)
@@ -218,19 +219,14 @@ public class PlayerMovement : MonoBehaviour
                 m_grappleLine.SetPosition(i, m_ropePositions[i]);
                 if (i == m_ropePositions.Count - 1 || m_ropePositions.Count == 1)
                     SetVector2RopePos(m_ropePositions);
-                else if (i - 1 == m_ropePositions.IndexOf(m_ropePositions.Last()))
-                    SetVector2RopePos(m_ropePositions,"Last");
             }
             else
                 m_grappleLine.SetPosition(i, transform.position);
         }
     }
-    void SetVector2RopePos(List<Vector2> _vec,string _state = "")
+    void SetVector2RopePos(List<Vector2> _vec)
     {
         Vector2 ropePosition;
-        if (_state == "Last")
-            ropePosition = m_ropePositions.Last();
-        else
             ropePosition = _vec[_vec.Count - 1];
         RopeAnchor.transform.position = ropePosition;
         if (!m_distanceSet)

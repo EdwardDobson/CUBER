@@ -298,6 +298,22 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+    public int GetCurrentHealth()
+    {
+        return m_currentHealth;
+    }
+    public int GetMaxHealth()
+    {
+        return m_maxHealth;
+    }
+    public int GetCurrentShield()
+    {
+        return m_currentShield;
+    }
+    public int GetMaxShield()
+    {
+        return m_maxShield;
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("DoorToOpen"))

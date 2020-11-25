@@ -12,6 +12,7 @@ public class LevelSplashScreen : MonoBehaviour
     void Start()
     {
         GameObject.Find("Player").GetComponent<PlayerMovement>().SetStart(false);
+        GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>().CanPause = false;
         m_background = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         StartCoroutine(fadeOut(m_duration));
     }
@@ -20,7 +21,7 @@ public class LevelSplashScreen : MonoBehaviour
         float counter = 0;
         //Get current color
         Color backgroundColour = m_background.material.color;
-
+  
         while (counter < duration)
         {
             counter += Time.deltaTime;
@@ -29,5 +30,7 @@ public class LevelSplashScreen : MonoBehaviour
             yield return null;
         }
         GameObject.Find("Player").GetComponent<PlayerMovement>().SetStart(true);
+        GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>().CanPause = true;
+        gameObject.SetActive(false);
     }
 }

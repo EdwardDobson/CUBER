@@ -28,9 +28,10 @@ public class PlayerStats : MonoBehaviour
     Vector3 m_spawnLocation;
     ParticleSystem m_bloodEffect;
     ParticleSystem m_shieldEffect;
-    int m_orangeKeyTotal;
-    int m_purpleKeyTotal;
-    int m_whiteKeyTotal;
+    int m_orangeKeyTotal = 0;
+    int m_purpleKeyTotal = 0;
+    int m_whiteKeyTotal = 0;
+  public  TextMeshProUGUI[] m_keyTexts =new TextMeshProUGUI[3];
     bool m_inDoor;
     // Start is called before the first frame update
     void Start()
@@ -39,8 +40,10 @@ public class PlayerStats : MonoBehaviour
         m_currentHealth = m_maxHealth;
         if(GameObject.Find("GameManager")!= null)
         m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
-        if(m_ui != null)
+ 
+        if (m_ui != null)
         {
+            m_keyTexts = new TextMeshProUGUI[3];
             m_ui.transform.GetChild(0).GetComponent<Slider>().maxValue = m_maxHealth;
             m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_maxHealth;
             m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
@@ -49,6 +52,10 @@ public class PlayerStats : MonoBehaviour
             m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             m_uiKeysText = m_ui.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             m_livesText.text = "Lives: " + m_lives;
+            m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
+            m_keyTexts[1] = m_ui.transform.GetChild(7).GetComponent<TextMeshProUGUI>();
+            m_keyTexts[2] = m_ui.transform.GetChild(8).GetComponent<TextMeshProUGUI>();
+
         }
         if (GameObject.Find("GameManager") != null)
             m_gameOverScreen = GameObject.Find("GameManager").transform.GetChild(1).gameObject;
@@ -71,16 +78,12 @@ public class PlayerStats : MonoBehaviour
             m_currentScore = 0;
         if (m_lives >= 3)
             m_lives = 3;
-     //   Debug.Log("Key Total: " + m_whiteKeyTotal);
         Die();
-        if(m_ui != null)
-        {
-       
-        }
-
-        InDoorCheck();
         if (m_ui != null)
             m_scoreText.text = "Score: " + m_currentScore;
+        m_keyTexts[0].text = "White x " + m_whiteKeyTotal;
+        m_keyTexts[1].text = "Purple x " + m_purpleKeyTotal;
+        m_keyTexts[2].text = "Orange x " + m_orangeKeyTotal;
     }
     public void AddStats(ref int _valueToIncrease,  int _valueForIncrease, int _maxValue = 0, GameObject _pickup = null)
     {
@@ -124,10 +127,8 @@ public class PlayerStats : MonoBehaviour
                 m_currentShield -= _value;
                 m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
                 PlayShieldEffect();
-
             }
         }
-  
     }
     public void ResetScore()
     {
@@ -155,8 +156,6 @@ public class PlayerStats : MonoBehaviour
                 m_gameOverScreen.SetActive(true);
                 Destroy(gameObject);
             }
-          
-      
         }
     }
     public void Respawn()
@@ -169,7 +168,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void IncreaseStats(PickupType _type,GameObject _pickup)
     {
-        switch(_type)
+        switch (_type)
         {
             case PickupType.Health:
                 AddStats(ref m_currentHealth, _pickup.GetComponent<Pickup>().PickupObject.Value,  m_maxHealth, _pickup);
@@ -229,33 +228,24 @@ public class PlayerStats : MonoBehaviour
     {
         m_shieldEffect.Play();
     }
-    public int GetKeyTotal(PickupType _type)
+ 
+    public int GetWhiteKeyTotal()
     {
-        int v = 0;
-        switch (_type)
-        {
-            case PickupType.OrangeKey:
-                v = m_orangeKeyTotal;
-                break;
-            case PickupType.WhiteKey:
-                 v = m_whiteKeyTotal;
-                Debug.Log("Key Total: " + v);
-                break;
-            case PickupType.PurpleKey:
-                v =  m_purpleKeyTotal;
-                break;
-            default:
-                break;
-        }
-
-        return v;
+        return m_whiteKeyTotal;
+    }
+    public int GetPurpleKeyTotal()
+    {
+        return m_purpleKeyTotal;
+    }
+    public int GetOrangeKeyTotal()
+    {
+        return m_orangeKeyTotal;
     }
     void InDoorCheck()
     {
         if (m_inDoor)
         {
-            if (m_ui != null)
-                m_uiKeysText.text = "Need more keys";
+           
        //     Debug.Log("Door in");
         }
         else
@@ -265,7 +255,8 @@ public class PlayerStats : MonoBehaviour
       //      Debug.Log("Door exit");
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name.Contains("DoorToOpen"))
         {
@@ -275,24 +266,39 @@ public class PlayerStats : MonoBehaviour
                 case DoorColour.Orange:
                     if (m_orangeKeyTotal > 0)
                     {
+                        GetComponent<AudioDetection>().PlayDoorSound(collision, collision.GetComponent<DoorOpen>().doorColour, m_orangeKeyTotal);
                         m_orangeKeyTotal -= 1;
-                        collision.gameObject.SetActive(false);
+             
+                    }
+                    else
+                    {
+                        if (m_ui != null)
+                            m_uiKeysText.text = "Need more " + DoorColour.Orange.ToString() +" keys";
                     }
                     break;
                 case DoorColour.Purple:
                     if (m_purpleKeyTotal > 0)
                     {
+                        GetComponent<AudioDetection>().PlayDoorSound(collision, collision.GetComponent<DoorOpen>().doorColour, m_purpleKeyTotal);
                         m_purpleKeyTotal -= 1;
-                        collision.gameObject.SetActive(false);
                     }
-
+                    else
+                    {
+                        if (m_ui != null)
+                            m_uiKeysText.text = "Need more " + DoorColour.Purple.ToString() + " keys";
+                    }
                     break;
                 case DoorColour.White:
 
                     if (m_whiteKeyTotal > 0)
                     {
+                        GetComponent<AudioDetection>().PlayDoorSound(collision,collision.GetComponent<DoorOpen>().doorColour, m_whiteKeyTotal);
                         m_whiteKeyTotal -= 1;
-                        collision.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        if (m_ui != null)
+                            m_uiKeysText.text = "Need more " + DoorColour.White.ToString() + " keys";
                     }
                     break;
             }

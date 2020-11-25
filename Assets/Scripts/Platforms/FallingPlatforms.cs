@@ -18,12 +18,15 @@ public class FallingPlatforms : MonoBehaviour
     public float FallSpeed;
     public PlatformState State;
     public float CoolDownMax;
+    public float TimeBeforeFallMax;
+     float TimeBeforeFall;
     float CoolDown;
     // Start is called before the first frame update
     void Start()
     {
         m_startPoint = transform.position;
         CoolDown = CoolDownMax;
+        TimeBeforeFall = TimeBeforeFallMax;
     }
 
     // Update is called once per frame
@@ -32,11 +35,12 @@ public class FallingPlatforms : MonoBehaviour
         switch (State)
         {
             case PlatformState.Idle:
-
+                GetComponent<BoxCollider2D>().enabled = true;
                 break;
             case PlatformState.Falling:
                 transform.position = Vector2.MoveTowards(transform.position, EndPoint, FallSpeed * Time.deltaTime);
-                if((Vector2)transform.position == EndPoint)
+                GetComponent<BoxCollider2D>().enabled = false;
+                if ((Vector2)transform.position == EndPoint)
                 {
                     CoolDown -= Time.deltaTime;
                     if (CoolDown <= 0)
@@ -49,12 +53,32 @@ public class FallingPlatforms : MonoBehaviour
                 break;
             case PlatformState.Recovering:
                 transform.position = Vector2.MoveTowards(transform.position, m_startPoint, RecoverySpeed * Time.deltaTime);
+                GetComponent<BoxCollider2D>().enabled = false;
                 if((Vector2)transform.position == m_startPoint)
                 {
-                 State =    PlatformState.Idle;
+                     State =    PlatformState.Idle;
                 }
                 break;
         }
 
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag.Contains("Player"))
+        {
+            TimeBeforeFall -= Time.deltaTime;
+            if(TimeBeforeFall <= 0)
+            {
+                State = PlatformState.Falling;
+                TimeBeforeFall = TimeBeforeFallMax;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Contains("Player"))
+        {
+            TimeBeforeFall = TimeBeforeFallMax;
+        }
     }
 }

@@ -19,6 +19,7 @@ public class AudioDetection : MonoBehaviour
             GameObject newGameObject = Instantiate(collision.transform.GetChild(0).gameObject, null);
             newGameObject.transform.position = collision.transform.position;
             newGameObject.GetComponent<ParticleSystem>().Play();
+            Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
         }
         if (collision.tag.Contains("Health"))
         {
@@ -28,6 +29,7 @@ public class AudioDetection : MonoBehaviour
                 GameObject newGameObject = Instantiate(collision.transform.GetChild(0).gameObject, null);
                 newGameObject.transform.position = collision.transform.position;
                 newGameObject.GetComponent<ParticleSystem>().Play();
+                Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
             }
         
         }
@@ -39,7 +41,40 @@ public class AudioDetection : MonoBehaviour
                 GameObject newGameObject = Instantiate(collision.transform.GetChild(0).gameObject, null);
                 newGameObject.transform.position = collision.transform.position;
                 newGameObject.GetComponent<ParticleSystem>().Play();
+                Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
             }
+        }
+        if(collision.tag.Contains("Key"))
+        {
+            if (collision.transform.childCount > 0)
+            {
+                Source.PlayOneShot(Clips[3]);
+                GameObject newGameObject = Instantiate(collision.transform.GetChild(0).gameObject, null);
+                newGameObject.transform.position = collision.transform.position;
+                newGameObject.GetComponent<ParticleSystem>().Play();
+                Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
+            }
+        }
+        if (collision.tag.Contains("DoorToOpen"))
+        {
+
+        }
+    }
+   public void PlayDoorSound(Collider2D _collision, DoorColour _colour, int _keyValue)
+    {
+        if (_collision.transform.childCount > 0)
+        {
+            if (_collision.GetComponent<DoorOpen>().doorColour == _colour && _keyValue > 0)
+            {
+                Source.PlayOneShot(Clips[3]);
+                GameObject newGameObject = Instantiate(_collision.transform.GetChild(0).gameObject, null);
+                newGameObject.transform.position = _collision.transform.position;
+                newGameObject.GetComponent<ParticleSystem>().Play();
+                Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
+                Destroy(_collision.gameObject);
+
+            }
+
         }
     }
 }

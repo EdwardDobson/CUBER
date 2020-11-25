@@ -12,13 +12,17 @@ public class FollowPlayer : MonoBehaviour
     Door[] m_doors;
     void FixedUpdate()
     {
-        if(SceneManager.GetActiveScene().buildIndex > 1)
+        if (SceneManager.GetActiveScene().buildIndex > 1)
         {
             for (int i = 0; i < m_doors.Length; ++i)
             {
                 if (m_doors[i].Active)
                     transform.position = m_cameraPositions[m_doors[i].RoomNumber];
             }
+        }
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
+        {
+            transform.position = new Vector3(0, 1, -10);
         }
     }
     void OnDisable()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D m_rb2d;
@@ -41,18 +43,23 @@ public class PlayerMovement : MonoBehaviour
     ParticleSystem m_jumpParticles;
     ParticleSystem m_grappleParticles;
     ParticleSystem m_grappleHitParticles;
+    ParticleSystem m_landParticles;
     // Start is called before the first frame update
     GhostReplay m_replay;
     Vector2 m_oldVelo;
+    int m_grappleUsedCount;
+    bool m_start;
     private void Awake()
     {
         GameObject rope = transform.GetChild(5).gameObject;
         m_groundCheck = GetComponent<GroundCheck>();
+        m_groundCheck.setIsGround(true);
         m_wallMask = LayerMask.GetMask("Wall");
         //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
         m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
         m_grappleParticles = transform.GetChild(6).GetComponent<ParticleSystem>();
         m_grappleHitParticles = transform.GetChild(7).GetComponent<ParticleSystem>();
+        m_landParticles = transform.GetChild(8).GetComponent<ParticleSystem>();
         m_grappleLine = transform.GetChild(4).GetComponent<LineRenderer>();
         rope.gameObject.SetActive(false);
         rope.gameObject.SetActive(true);
@@ -62,6 +69,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if ( SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            m_start = true;
+        }
+        if(m_start)
+        {
         WallJumping();
         //    m_replay.AddPositions(transform.position);
         //   m_replay.AddHorizontalValues(m_horizontal);
@@ -74,6 +87,12 @@ public class PlayerMovement : MonoBehaviour
             m_frontCheck.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
         Squish();
         RunGrapple();
+        if(m_groundCheck.isGrounded() && m_rb2d.velocity.y != 0)
+        {
+            m_landParticles.Play();
+            m_landParticles.GetComponent<AudioSource>().Play();
+        }
+        }
     }
     private void FixedUpdate()
     {
@@ -156,6 +175,11 @@ public class PlayerMovement : MonoBehaviour
     void MakeDust()
     {
         m_jumpParticles.Play();
+        m_jumpParticles.GetComponent<AudioSource>().Play();
+    }
+    public void SetStart(bool _start)
+    {
+        m_start = _start;
     }
     #region Grapple Code
     [SerializeField]
@@ -197,13 +221,20 @@ public class PlayerMovement : MonoBehaviour
                     if (m_ropePositions.Count < 1)
                     {
                         m_grappleAttached = true;
-                        m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+            
                         m_ropePositions.Add(hit.point);
                         RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
                         RopeJoint.enabled = true;
-                        m_grappleParticles.Play();
                         m_grappleHitParticles.gameObject.transform.position = hit.point;
+                    if (m_grappleUsedCount > 0)
+                    {
+                        m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                        m_grappleParticles.Play();
                         m_grappleHitParticles.Play();
+                    }
+                    m_grappleUsedCount++;
+                    if (m_grappleUsedCount >= 1)
+                        m_grappleUsedCount = 1;
                 }
             }
         }

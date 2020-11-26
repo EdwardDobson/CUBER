@@ -565,6 +565,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 481709154}
+    - target: {fileID: 1187566144, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -162
+      objectReference: {fileID: 0}
+    - target: {fileID: 1187566145, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: m_text
+      value: '
+
+        Collect Big Star
+
+        Complete The Level Deathless '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1187566145, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307904897, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1307904901, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
       propertyPath: m_Camera
       value: 

@@ -90,7 +90,7 @@ public class PlayerStats : MonoBehaviour
         }
         if(m_scoreObjs.Length > 0)
         m_pointThreshold = m_totalPointsInScene / m_scoreObjs.Length * 200;
-        m_objectivesScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Gain " + m_pointThreshold + " score to earn a star.\n" + "Collect the big star.\n" + "Complete the level without dying.";
+        m_objectivesScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Each objective completed earns you a star!\n\n\n" +  "Gain " + m_pointThreshold + " score.\n" + "Collect the big star.\n" + "Complete the level without dying.";
 
     }
     void Update()

@@ -53,6 +53,8 @@ public class Settings : MonoBehaviour
         ColourBlindLoad();
         m_ui = transform.GetChild(0).gameObject;
         LoadClips();
+        FullscreenToggle.isOn = Screen.fullScreen;
+        FullscreenTogglePaused.isOn = Screen.fullScreen;
         //    GetResolutions();
         //GetRefreshRates();
     }

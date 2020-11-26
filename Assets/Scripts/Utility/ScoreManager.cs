@@ -32,11 +32,12 @@ public class ScoreManager : MonoBehaviour
     public void SetDataToSaveUI()
     {
         WinScreen.SetActive(true);
-        _data = new SaveData();
+       
+             _data = new SaveData();
         m_player = GameObject.Find("Player").GetComponent<PlayerStats>();
         WinScreen.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = m_player.GetScore().ToString();
         _data.Score = m_player.GetScore();
-        _data.Nickname = WinScreen.transform.GetChild(9).GetComponent<TMP_InputField>().text;
+      
         if (m_player.CheckIfDied())
         {
             WinScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.green;
@@ -76,7 +77,11 @@ public class ScoreManager : MonoBehaviour
     {
        
         if(ShouldSave)
-        SaveToFile();
+        {
+            _data.Nickname = WinScreen.transform.GetChild(9).GetComponent<TMP_InputField>().text;
+            SaveToFile();
+        }
+
     }
     public void SetShouldSave(bool _state)
     {

@@ -15,21 +15,57 @@ MonoBehaviour:
   datas:
   - Score: 12
     StarCount: 2
+    LevelIndex: 3
+    Nickname: 000
   - Score: 11
     StarCount: 2
+    LevelIndex: 2
+    Nickname: 123
   - Score: 10
     StarCount: 2
+    LevelIndex: 1
+    Nickname: 321
   - Score: 9
     StarCount: 2
+    LevelIndex: 3
+    Nickname: 453
   - Score: 8
     StarCount: 1
+    LevelIndex: 1
+    Nickname: 632
   - Score: 7
     StarCount: 0
+    LevelIndex: 2
+    Nickname: ddd
   - Score: 6
     StarCount: 0
+    LevelIndex: 1
+    Nickname: www
   - Score: 5
     StarCount: 2
+    LevelIndex: 3
+    Nickname: eee
   - Score: 4
     StarCount: 1
+    LevelIndex: 1
+    Nickname: ede
   - Score: 3
     StarCount: 1
+    LevelIndex: 2
+    Nickname: 212
+  - Score: 0
+    StarCount: 1
+    LevelIndex: 1
+    Nickname: EDd
+  - Score: 0
+    StarCount: 0
+    LevelIndex: 1
+    Nickname: 123
+  - Score: 1760
+    StarCount: 3
+    LevelIndex: 1
+    Nickname: Edi
+  - Score: 1880
+    StarCount: 3
+    LevelIndex: 1
+    Nickname: e

@@ -69,7 +69,7 @@ public class ExitLevel : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) )
             {
-                GameObject.Find("GameManager").GetComponent<ScoreManager>().SetDataToSave();
+                GameObject.Find("GameManager").GetComponent<ScoreManager>().SetDataToSaveUI();
             }
         }
     }

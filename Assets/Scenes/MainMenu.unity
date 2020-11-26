@@ -773,6 +773,14 @@ PrefabInstance:
       propertyPath: ColourBlindPresetsPaused
       value: 
       objectReference: {fileID: 388415842}
+    - target: {fileID: 6408655687193747361, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: FullscreenToggle
+      value: 
+      objectReference: {fileID: 1508900679}
+    - target: {fileID: 6408655687193747361, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
+      propertyPath: FullscreenTogglePaused
+      value: 
+      objectReference: {fileID: 1339765952}
     - target: {fileID: 6408655687193747362, guid: e8ef54cadc2b89e4aa68e1cc8b1cc4fd, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1258,6 +1266,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1339765952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4581130099294748319, guid: 98b080cad9812564288658b6c5567696, type: 3}
+  m_PrefabInstance: {fileID: 340969921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1473651465 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1473651465, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
@@ -1267,6 +1286,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1508900679 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8402335618882153000, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
+  m_PrefabInstance: {fileID: 2816449634796888992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1527551667 stripped

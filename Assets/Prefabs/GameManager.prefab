@@ -3457,6 +3457,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1822834805}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetShouldSave
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1822834805}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetDataToSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 9099407596554748361}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3494,6 +3518,7 @@ GameObject:
   - component: {fileID: 2877570036701701542}
   - component: {fileID: 4719856963252041539}
   - component: {fileID: 7750288068196352429}
+  - component: {fileID: 1527551672}
   m_Layer: 0
   m_Name: Nickname Field
   m_TagString: Untagged
@@ -3510,7 +3535,7 @@ RectTransform:
   m_GameObject: {fileID: 6108254936291621771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 6269011481958442078}
   m_Father: {fileID: 5793620026590853915}
@@ -3656,6 +3681,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &1527551672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108254936291621771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927cb3e3e7e2366438e36de9386d4730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6184279774031882124
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,11 +4016,14 @@ MonoBehaviour:
     Score: 0
     StarCount: 0
     LevelIndex: 0
+    Nickname: 
   HighestScores: {fileID: 0}
   Positions: {fileID: 0}
   Stars: {fileID: 0}
+  Nicknames: {fileID: 0}
   LevelSelector: {fileID: 0}
   WinScreen: {fileID: 9099407596554748361}
+  ShouldSave: 0
 --- !u!1 &6849182138888907254
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,6 +4323,30 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1822834805}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetShouldSave
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1822834805}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetDataToSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 9099407596554748361}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -5000,7 +5064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5793620026590853915
 RectTransform:
   m_ObjectHideFlags: 0

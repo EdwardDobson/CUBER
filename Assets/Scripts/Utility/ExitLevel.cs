@@ -11,7 +11,9 @@ public class ExitLevel : MonoBehaviour
     bool m_stopTakingInput;
     bool m_playerIn;
     bool m_playerInLevelExit;
-    
+    private void Start()
+    {
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Contains("Player"))
@@ -67,10 +69,9 @@ public class ExitLevel : MonoBehaviour
         }
         if (m_playerInLevelExit)
         {
-            if (Input.GetKeyDown(KeyCode.E) )
+            if (Input.GetKeyDown(KeyCode.E))
             {
-              
-               GameObject.Find("GameManager").GetComponent<ScoreManager>().SetDataToSaveUI();
+                GameObject.Find("GameManager").GetComponent<ScoreManager>().SaveDataVisual();
             }
         }
     }

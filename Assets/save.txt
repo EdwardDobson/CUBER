@@ -1,0 +1,18 @@
+{
+    "Scores": [
+        11111,
+        1231231
+    ],
+    "StarCount": [
+        2,
+        4
+    ],
+    "LevelIndex": [
+        1,
+        1
+    ],
+    "Nickname": [
+        "ads",
+        "rea"
+    ]
+}

@@ -10,6 +10,7 @@ public class Settings : MonoBehaviour
 {
     public PostProcessProfile ColourVolume;
     public Toggle FullscreenToggle;
+    public Toggle FullscreenTogglePaused;
     public Slider[] AudioSliders = new Slider[3];
     public Slider[] AudioSlidersPaused = new Slider[3];
     public Slider ColourBlindIntensitySlider;
@@ -71,7 +72,6 @@ public class Settings : MonoBehaviour
         }
         return _clip;
     }
-    // Update is called once per frame
     void Update()
     {
         if (Time.timeScale == 0)
@@ -176,6 +176,7 @@ public class Settings : MonoBehaviour
             ResolutionsMain.options.Add(new TMP_Dropdown.OptionData() { text =  "" + m_resolutions[i].width + " X " + m_resolutions[i].height});
         }
     }
+
     void GetRefreshRates()
     {
         Resolution[] resolutions = Screen.resolutions;
@@ -197,10 +198,15 @@ public class Settings : MonoBehaviour
     }
     public void Fullscreen()
     {
-        if(FullscreenToggle.isOn)
-        Screen.fullScreen = true;
-        else
+        if(FullscreenToggle.isOn || FullscreenTogglePaused.isOn)
+        {
+            Screen.fullScreen = true;
+        }
+        if (!FullscreenToggle.isOn || !FullscreenTogglePaused.isOn)
+        {
             Screen.fullScreen = false;
+        }
+ 
     }
     public void MasterVolume(float _value)
     {

@@ -20,6 +20,7 @@ TagManager:
   - Health
   - Key
   - DoorToOpen
+  - BigStar
   layers:
   - Default
   - TransparentFX

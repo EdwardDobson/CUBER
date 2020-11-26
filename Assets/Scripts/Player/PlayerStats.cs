@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
@@ -21,26 +23,38 @@ public class PlayerStats : MonoBehaviour
     int m_lives = 3;
     GameObject m_ui;
     GameObject m_gameOverScreen;
+    GameObject m_objectivesScreen;
     TextMeshProUGUI m_livesText;
     TextMeshProUGUI m_scoreText;
     TextMeshProUGUI m_uiKeysText;
-    bool m_shouldRespawn = false;
+    TextMeshProUGUI m_pointsNeededText;
     Vector3 m_spawnLocation;
     ParticleSystem m_bloodEffect;
     ParticleSystem m_shieldEffect;
     int m_orangeKeyTotal = 0;
     int m_purpleKeyTotal = 0;
     int m_whiteKeyTotal = 0;
-  public  TextMeshProUGUI[] m_keyTexts =new TextMeshProUGUI[3];
-    bool m_inDoor;
-    // Start is called before the first frame update
+    public  TextMeshProUGUI[] m_keyTexts =new TextMeshProUGUI[3];
+    [SerializeField]
+    bool m_bigStarCollected;
+    [SerializeField]
+    bool m_didntDie;
+    [SerializeField]
+    bool m_gainedScoreThreshold;
+    [SerializeField]
+    int m_totalPointsInScene;
+    [SerializeField]
+    int m_pointThreshold;
+    GameObject[] m_scoreObjs;
     void Start()
     {
         m_currentScore = m_maxScore;
         m_currentHealth = m_maxHealth;
         if(GameObject.Find("GameManager")!= null)
-        m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
- 
+        {
+            m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
+            m_objectivesScreen = GameObject.Find("GameManager").transform.GetChild(3).gameObject;
+        }
         if (m_ui != null)
         {
             m_keyTexts = new TextMeshProUGUI[3];
@@ -55,6 +69,7 @@ public class PlayerStats : MonoBehaviour
             m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
             m_keyTexts[1] = m_ui.transform.GetChild(7).GetComponent<TextMeshProUGUI>();
             m_keyTexts[2] = m_ui.transform.GetChild(8).GetComponent<TextMeshProUGUI>();
+            m_pointsNeededText = m_ui.transform.GetChild(10).GetComponent<TextMeshProUGUI>();
 
         }
         if (GameObject.Find("GameManager") != null)
@@ -62,10 +77,22 @@ public class PlayerStats : MonoBehaviour
         m_spawnLocation = transform.position;
         m_bloodEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
         m_shieldEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
+        Invoke("LateStart", 0.5f);
 
     }
+    void LateStart()
+    {
+        m_scoreObjs = GameObject.FindGameObjectsWithTag("Score");
+        foreach (GameObject g in m_scoreObjs)
+        {
+            if(g.GetComponent<Pickup>() != null)
+                m_totalPointsInScene += g.GetComponent<Pickup>().PickupObject.Value;
+        }
+        if(m_scoreObjs.Length > 0)
+        m_pointThreshold = m_totalPointsInScene / m_scoreObjs.Length * 200;
+        m_objectivesScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Gain " + m_pointThreshold + " score to earn a star.\n" + "Collect the big star.\n" + "Complete the level without dying.";
 
-    // Update is called once per frame
+    }
     void Update()
     {
         if (m_currentHealth > m_maxHealth)
@@ -84,6 +111,19 @@ public class PlayerStats : MonoBehaviour
         m_keyTexts[0].text = "White x " + m_whiteKeyTotal;
         m_keyTexts[1].text = "Purple x " + m_purpleKeyTotal;
         m_keyTexts[2].text = "Orange x " + m_orangeKeyTotal;
+        if (m_currentScore >= m_pointThreshold)
+        {
+            m_gainedScoreThreshold = true;
+        }
+        else m_gainedScoreThreshold = false;
+        if(Input.GetKey(KeyCode.Tab) && SceneManager.GetActiveScene().buildIndex > 1)
+        {
+            m_objectivesScreen.SetActive(true);
+        }
+        else
+        {
+            m_objectivesScreen.SetActive(false);
+        }
     }
     public void AddStats(ref int _valueToIncrease,  int _valueForIncrease, int _maxValue = 0, GameObject _pickup = null)
     {
@@ -142,7 +182,6 @@ public class PlayerStats : MonoBehaviour
             if(m_ui != null)
             m_livesText.text = "Lives: " + m_lives;
             m_currentHealth = m_maxHealth;
-            m_shouldRespawn = true;
             GetComponent<PlayerMovement>().RopeReset();
             m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
             m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
@@ -228,7 +267,6 @@ public class PlayerStats : MonoBehaviour
     {
         m_shieldEffect.Play();
     }
- 
     public int GetWhiteKeyTotal()
     {
         return m_whiteKeyTotal;
@@ -241,26 +279,12 @@ public class PlayerStats : MonoBehaviour
     {
         return m_orangeKeyTotal;
     }
-    void InDoorCheck()
-    {
-        if (m_inDoor)
-        {
-           
-       //     Debug.Log("Door in");
-        }
-        else
-        {
-            if(m_ui != null)
-            m_uiKeysText.text = "";
-      //      Debug.Log("Door exit");
-        }
-    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name.Contains("DoorToOpen"))
         {
-            m_inDoor = true;
             switch (collision.GetComponent<DoorOpen>().doorColour)
             {
                 case DoorColour.Orange:
@@ -268,7 +292,6 @@ public class PlayerStats : MonoBehaviour
                     {
                         GetComponent<AudioDetection>().PlayDoorSound(collision, collision.GetComponent<DoorOpen>().doorColour, m_orangeKeyTotal);
                         m_orangeKeyTotal -= 1;
-             
                     }
                     else
                     {
@@ -303,6 +326,10 @@ public class PlayerStats : MonoBehaviour
                     break;
             }
         }
+        if(collision.tag.Contains("BigStar"))
+        {
+            m_bigStarCollected = true;
+        }
     }
     public int GetCurrentHealth()
     {
@@ -324,6 +351,24 @@ public class PlayerStats : MonoBehaviour
     {
         return m_currentScore;
     }
+    public bool GetBigStarCollected()
+    {
+        return m_bigStarCollected;
+    }
+    public bool GetPointThresholdMet()
+    {
+        return m_gainedScoreThreshold;
+    }
+    public bool CheckIfDied()
+    {
+        if (m_lives >= 3)
+        {
+            m_didntDie = true;
+        }
+        else
+            m_didntDie = false;
+        return m_didntDie;
+    }
     public int AddToScore(int _value)
     {
         return m_currentScore += _value;
@@ -332,10 +377,9 @@ public class PlayerStats : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("DoorToOpen"))
         {
-            m_inDoor = false;
             if (m_ui != null)
                 m_uiKeysText.text = "";
-        
         }
     }
+
 }

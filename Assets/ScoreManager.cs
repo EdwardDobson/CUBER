@@ -19,41 +19,48 @@ public class ScoreManager : MonoBehaviour
     SaveData _data = new SaveData();
     public TextMeshProUGUI HighestScores;
     public TextMeshProUGUI Positions;
-        public TextMeshProUGUI Stars;
-    public TMP_SpriteAsset Star;
+    public TextMeshProUGUI Stars;
     SaveObj m_saveObject;
     PlayerStats m_player;
-    /*
-    What needs to be saved
-    ---------------------------
-    Score
-    Player Lives // To check if they had died
-    Big star was collected
-         
-         
-    */
-
-    void Start()
-    {
-    
-    }
-    void Update()
-    {
-        
-    }
+    public GameObject WinScreen;
 
     public void SetDataToSave()
     {
+        WinScreen.SetActive(true);
+        _data = new SaveData();
         m_player = GameObject.Find("Player").GetComponent<PlayerStats>();
-        _data.Score = m_player.GetScore(); 
-
+        WinScreen.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = m_player.GetScore().ToString();
+        _data.Score = m_player.GetScore();
+        if(m_player.CheckIfDied())
+        {
+            WinScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.green;
+            _data.StarCount += 1;
+        }
+        else
+            WinScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
+        if (m_player.GetBigStarCollected())
+        {
+            _data.StarCount += 1;
+            WinScreen.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.green;
+        }
+        else
+            WinScreen.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.red;
+        if (m_player.GetPointThresholdMet())
+        {
+            WinScreen.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().color = Color.green;
+            _data.StarCount += 1;
+        }
+        else
+            WinScreen.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().color = Color.red;
+        WinScreen.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = _data.StarCount.ToString();
         SaveToFile();
     }
   public void SaveToFile()
     {
         if(File.Exists("Assets/Resources/Save/SaveData.asset"))
         {
-            m_saveObject = (SaveObj)Resources.Load<ScriptableObject>("Save/SaveData");
+            if (m_saveObject == null)
+                m_saveObject = (SaveObj)Resources.Load<ScriptableObject>("Save/SaveData");
             m_saveObject.datas.Add(_data);
         }
     }
@@ -62,16 +69,15 @@ public class ScoreManager : MonoBehaviour
         Positions.text = "";
         HighestScores.text = "";
         Stars.text = "";
-        m_saveObject = (SaveObj)Resources.Load<ScriptableObject>("Save/SaveData");
+        if(m_saveObject == null)
+            m_saveObject = (SaveObj)Resources.Load<ScriptableObject>("Save/SaveData");
         m_saveObject.datas = m_saveObject.datas.OrderByDescending(s => s.Score).ToList();
         if (m_saveObject.datas.Count > 10)
         {
              m_saveObject.datas.RemoveRange(10, m_saveObject.datas.Count - 10);
         }
-     
         if (m_saveObject.datas.Count > 0)
         {
-       
             for (int i = 0; i < m_saveObject.datas.Count; ++i)
             {
                 Positions.text += (i + 1).ToString();
@@ -86,5 +92,4 @@ public class ScoreManager : MonoBehaviour
             }
         }
      }
-
 }

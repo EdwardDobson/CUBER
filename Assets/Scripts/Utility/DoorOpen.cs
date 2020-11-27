@@ -12,4 +12,5 @@ public enum DoorColour
 public class DoorOpen : MonoBehaviour
 {
     public DoorColour doorColour;
+    public AudioClip DoorSound;
 }

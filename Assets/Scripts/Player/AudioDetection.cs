@@ -35,7 +35,7 @@ public class AudioDetection : MonoBehaviour
         }
         if (collision.tag.Contains("Shield"))
         {
-            if (collision.transform.childCount > 0 && m_playerStats.GetCurrentShield() < m_playerStats.GetMaxShield())
+            if (collision.transform.childCount > 0)
             {
                 Source.PlayOneShot(Clips[2]);
                 GameObject newGameObject = Instantiate(collision.transform.GetChild(0).gameObject, null);

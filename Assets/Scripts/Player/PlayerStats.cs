@@ -27,7 +27,6 @@ public class PlayerStats : MonoBehaviour
     TextMeshProUGUI m_livesText;
     TextMeshProUGUI m_scoreText;
     TextMeshProUGUI m_uiKeysText;
-    TextMeshProUGUI m_pointsNeededText;
     Vector3 m_spawnLocation;
     ParticleSystem m_bloodEffect;
     ParticleSystem m_shieldEffect;
@@ -46,11 +45,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     int m_pointThreshold;
     GameObject[] m_scoreObjs;
+    AudioSource m_source;
     void Start()
     {
         m_currentScore = m_maxScore;
         m_currentHealth = m_maxHealth;
-        if(GameObject.Find("GameManager")!= null)
+        m_source = GetComponent<AudioSource>();
+        if (GameObject.Find("GameManager")!= null)
         {
             m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
             m_objectivesScreen = GameObject.Find("GameManager").transform.GetChild(3).gameObject;
@@ -69,7 +70,6 @@ public class PlayerStats : MonoBehaviour
             m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
             m_keyTexts[1] = m_ui.transform.GetChild(7).GetComponent<TextMeshProUGUI>();
             m_keyTexts[2] = m_ui.transform.GetChild(8).GetComponent<TextMeshProUGUI>();
-            m_pointsNeededText = m_ui.transform.GetChild(10).GetComponent<TextMeshProUGUI>();
 
         }
         if (GameObject.Find("GameManager") != null)
@@ -131,7 +131,13 @@ public class PlayerStats : MonoBehaviour
         {
             _valueToIncrease += _valueForIncrease;
             if(_pickup)
-            Destroy(_pickup);
+            {
+                PlayEffect(_pickup);
+
+                m_source.clip =   _pickup.GetComponent<Pickup>().PickupObject.SoundClip;
+                m_source.Play();
+                Destroy(_pickup);
+            }
         }
         m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
         m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
@@ -279,56 +285,59 @@ public class PlayerStats : MonoBehaviour
     {
         return m_orangeKeyTotal;
     }
+    //Used to play pickup and door effects
+    void PlayEffect(GameObject _obj)
+    {
+        if(_obj.transform.childCount > 0)
+        {
+            GameObject newGameObject = Instantiate(_obj.transform.GetChild(0).gameObject, null);
+            newGameObject.transform.position = _obj.transform.position;
+            newGameObject.GetComponent<ParticleSystem>().Play();
+            Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
+        }
 
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name.Contains("DoorToOpen"))
         {
-            switch (collision.GetComponent<DoorOpen>().doorColour)
+            DoorOpen dOpen= collision.GetComponent<DoorOpen>();
+            if(dOpen != null)
             {
-                case DoorColour.Orange:
-                    if (m_orangeKeyTotal > 0)
-                    {
-                        GetComponent<AudioDetection>().PlayDoorSound(collision, collision.GetComponent<DoorOpen>().doorColour, m_orangeKeyTotal);
-                        m_orangeKeyTotal -= 1;
-                    }
-                    else
-                    {
-                        if (m_ui != null)
-                            m_uiKeysText.text = "Need more " + DoorColour.Orange.ToString() +" keys";
-                    }
-                    break;
-                case DoorColour.Purple:
-                    if (m_purpleKeyTotal > 0)
-                    {
-                        GetComponent<AudioDetection>().PlayDoorSound(collision, collision.GetComponent<DoorOpen>().doorColour, m_purpleKeyTotal);
-                        m_purpleKeyTotal -= 1;
-                    }
-                    else
-                    {
-                        if (m_ui != null)
-                            m_uiKeysText.text = "Need more " + DoorColour.Purple.ToString() + " keys";
-                    }
-                    break;
-                case DoorColour.White:
-
-                    if (m_whiteKeyTotal > 0)
-                    {
-                        GetComponent<AudioDetection>().PlayDoorSound(collision,collision.GetComponent<DoorOpen>().doorColour, m_whiteKeyTotal);
-                        m_whiteKeyTotal -= 1;
-                    }
-                    else
-                    {
-                        if (m_ui != null)
-                            m_uiKeysText.text = "Need more " + DoorColour.White.ToString() + " keys";
-                    }
-                    break;
+                switch (dOpen.doorColour)
+                {
+                    case DoorColour.Orange:
+                        OpenDoor(collision.gameObject, DoorColour.Orange,ref m_orangeKeyTotal);
+                        break;
+                    case DoorColour.Purple:
+                        OpenDoor(collision.gameObject, DoorColour.Purple,ref  m_purpleKeyTotal);
+                        break;
+                    case DoorColour.White:
+                        OpenDoor(collision.gameObject, DoorColour.White, ref m_whiteKeyTotal);
+                        break;
+                }
             }
-        }
+        } 
         if(collision.tag.Contains("BigStar"))
         {
             m_bigStarCollected = true;
+        }
+    }
+    void OpenDoor(GameObject _door,DoorColour _colour, ref int _keyTotal)
+    {
+        if (_keyTotal > 0)
+        {
+            m_source.clip = _door.GetComponent<DoorOpen>().DoorSound;
+            m_source.Play();
+            _keyTotal -= 1;
+            PlayEffect(_door);
+            Destroy(_door.gameObject);
+        }
+        else
+        {
+            if (m_ui != null)
+                m_uiKeysText.text = "Need more " + _colour.ToString() + " keys";
         }
     }
     public int GetCurrentHealth()

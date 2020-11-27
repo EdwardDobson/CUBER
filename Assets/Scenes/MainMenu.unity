@@ -1521,6 +1521,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 227026836}
+    - target: {fileID: 2716577511982681757, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
+      propertyPath: m_text
+      value: Cuber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716577511982681757, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716577511982681757, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2716577511982681757, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2716577512211867115, guid: 49c29c22093d6c540b0039e71335d30f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 

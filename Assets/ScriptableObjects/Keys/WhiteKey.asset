@@ -15,3 +15,4 @@ MonoBehaviour:
   Value: 1
   PickupType: 6
   ShouldReduceValue: 0
+  SoundClip: {fileID: 8300000, guid: fc3a08f183cc530458a594e6a2834b23, type: 3}

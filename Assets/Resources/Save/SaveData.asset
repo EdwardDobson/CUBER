@@ -13,23 +13,7 @@ MonoBehaviour:
   m_Name: SaveData
   m_EditorClassIdentifier: 
   datas:
-  - Score: 12
-    StarCount: 2
-  - Score: 11
-    StarCount: 2
-  - Score: 10
-    StarCount: 2
-  - Score: 9
-    StarCount: 2
-  - Score: 8
-    StarCount: 1
-  - Score: 7
-    StarCount: 0
-  - Score: 6
-    StarCount: 0
-  - Score: 5
-    StarCount: 2
-  - Score: 4
-    StarCount: 1
-  - Score: 3
-    StarCount: 1
+  - Scores: 
+    StarCount: 000000000000000000000000000000000000000000000000
+    LevelIndex: 020000000200000002000000020000000200000002000000
+    Nickname: []

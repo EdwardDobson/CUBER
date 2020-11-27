@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ExitLevel : MonoBehaviour
 {
     public int NextLevelIndex;
     bool m_stopTakingInput;
     bool m_playerIn;
+    bool m_playerInLevelExit;
+    private void Start()
+    {
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Contains("Player"))
@@ -15,10 +21,16 @@ public class ExitLevel : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 m_playerIn = true;
+                if (transform.childCount > 1)
+                {
+                    transform.GetChild(2).gameObject.SetActive(true);
+                }
+
             }
-            else
+            if (SceneManager.GetActiveScene().buildIndex > 1)
             {
-                LoadLevelInGame(NextLevelIndex);
+                m_playerInLevelExit = true;
+                transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = "Press E";
             }
         }
     }
@@ -28,7 +40,14 @@ public class ExitLevel : MonoBehaviour
         {
             if (m_playerIn)
                 m_playerIn = false;
-  
+            if (transform.childCount > 1)
+            {
+                transform.GetChild(2).gameObject.SetActive(false);
+            }
+            if (transform.childCount == 1)
+            {
+                transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = "";
+            }
         }
     }
     private void Update()
@@ -48,9 +67,20 @@ public class ExitLevel : MonoBehaviour
                 m_stopTakingInput = true;
             }
         }
+        if (m_playerInLevelExit)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GameObject.Find("GameManager").GetComponent<ScoreManager>().SaveDataVisual();
+            }
+        }
     }
     IEnumerator PlayLevelEndEffect()
     {
+        if (transform.childCount > 1)
+        {
+            transform.GetChild(2).gameObject.SetActive(false);
+        }
         transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(transform.GetChild(1).GetComponent<ParticleSystem>().main.duration);
         LoadLevelInGame(NextLevelIndex);
@@ -62,7 +92,8 @@ public class ExitLevel : MonoBehaviour
     IEnumerator LoadAsync(int _index)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_index);
-        while(!asyncLoad.isDone)
+    
+        while (!asyncLoad.isDone)
         {
             yield return null;
         }

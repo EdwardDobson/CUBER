@@ -15,4 +15,5 @@ public class BasePickup : ScriptableObject
     public int Value;
     public PickupType PickupType;
     public bool ShouldReduceValue;
+    public AudioClip SoundClip;
 }

@@ -4992,7 +4992,7 @@ MonoBehaviour:
   ShootingType: 1
   m_player: {fileID: 7374517359758440171, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
   m_detectionRange: 8
-  m_maxFireRate: 1
+  m_maxFireRate: 0.7
   m_bulletPrefab: {fileID: 8136934223580332809, guid: f17d7f5fe898c8448b43077858d5a989, type: 3}
   m_shotDamage: 1
   m_positions:

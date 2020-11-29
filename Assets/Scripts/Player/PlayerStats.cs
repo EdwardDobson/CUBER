@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -28,8 +29,7 @@ public class PlayerStats : MonoBehaviour
     TextMeshProUGUI m_scoreText;
     TextMeshProUGUI m_uiKeysText;
     Vector3 m_spawnLocation;
-    ParticleSystem m_bloodEffect;
-    ParticleSystem m_shieldEffect;
+    ParticleManager m_particleManager;
     int m_orangeKeyTotal = 0;
     int m_purpleKeyTotal = 0;
     int m_whiteKeyTotal = 0;
@@ -46,11 +46,15 @@ public class PlayerStats : MonoBehaviour
     int m_pointThreshold;
     GameObject[] m_scoreObjs;
     AudioSource m_source;
+    PostProcessProfile m_volume;
+    GameObject m_heartImage;
     void Start()
     {
+
         m_currentScore = m_maxScore;
         m_currentHealth = m_maxHealth;
         m_source = GetComponent<AudioSource>();
+        m_volume = GameObject.Find("PostFx").GetComponent<PostProcessVolume>().profile;
         if (GameObject.Find("GameManager")!= null)
         {
             m_ui = GameObject.Find("GameManager").transform.GetChild(0).gameObject;
@@ -63,10 +67,11 @@ public class PlayerStats : MonoBehaviour
             m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_maxHealth;
             m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
             m_ui.transform.GetChild(1).GetComponent<Slider>().maxValue = m_maxShield;
+            m_heartImage = m_ui.transform.GetChild(10).gameObject;
             m_livesText = m_ui.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             m_uiKeysText = m_ui.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
-            m_livesText.text = "Lives: " + m_lives;
+            m_livesText.text = "<sprite index= 0> x " + m_lives;
             m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
             m_keyTexts[1] = m_ui.transform.GetChild(7).GetComponent<TextMeshProUGUI>();
             m_keyTexts[2] = m_ui.transform.GetChild(8).GetComponent<TextMeshProUGUI>();
@@ -75,8 +80,8 @@ public class PlayerStats : MonoBehaviour
         if (GameObject.Find("GameManager") != null)
             m_gameOverScreen = GameObject.Find("GameManager").transform.GetChild(1).gameObject;
         m_spawnLocation = transform.position;
-        m_bloodEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
-        m_shieldEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
+        m_particleManager = GetComponent<ParticleManager>();
+        m_volume.GetSetting<Vignette>().color.value = Color.black;
         Invoke("LateStart", 0.5f);
 
     }
@@ -90,7 +95,7 @@ public class PlayerStats : MonoBehaviour
         }
         if(m_scoreObjs.Length > 0)
         m_pointThreshold = m_totalPointsInScene / m_scoreObjs.Length * 200;
-        m_objectivesScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Each objective completed earns you a star!\n\n\n" +  "Gain " + m_pointThreshold + " score.\n" + "Collect the big star.\n" + "Complete the level without dying.";
+        m_objectivesScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Each objective completed earns you a star!\n\n\n" +  "Gain " + m_pointThreshold + " score.\n\n" + "Collect the big star.\n\n" + "Complete the level without dying.";
 
     }
     void Update()
@@ -107,10 +112,10 @@ public class PlayerStats : MonoBehaviour
             m_lives = 3;
         Die();
         if (m_ui != null)
-            m_scoreText.text = "Score: " + m_currentScore;
-        m_keyTexts[0].text = "White x " + m_whiteKeyTotal;
-        m_keyTexts[1].text = "Purple x " + m_purpleKeyTotal;
-        m_keyTexts[2].text = "Orange x " + m_orangeKeyTotal;
+            m_scoreText.text = "Score:" + m_currentScore;
+        m_keyTexts[0].text = "<sprite index= 0> x " + m_whiteKeyTotal;
+        m_keyTexts[1].text = "<sprite index= 1> x " + m_purpleKeyTotal;
+        m_keyTexts[2].text = "<sprite index= 2> x " + m_orangeKeyTotal;
         if (m_currentScore >= m_pointThreshold)
         {
             m_gainedScoreThreshold = true;
@@ -162,8 +167,8 @@ public class PlayerStats : MonoBehaviour
             {
                 m_currentHealth -= _value;
                 m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
-
-                PlayBloodEffect();
+                m_particleManager.PlayEffect(ParticleType.Blood);
+                StartCoroutine(FlashDamage(Color.red));
             }
         }
         else
@@ -172,9 +177,16 @@ public class PlayerStats : MonoBehaviour
             {
                 m_currentShield -= _value;
                 m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
-                PlayShieldEffect();
+                m_particleManager.PlayEffect(ParticleType.Shield);
+                StartCoroutine(FlashDamage(Color.blue));
             }
         }
+    }
+    IEnumerator FlashDamage(Color _colour)
+    {
+        m_volume.GetSetting<Vignette>().color.value = _colour;
+        yield return new WaitForSeconds(0.5f);
+        m_volume.GetSetting<Vignette>().color.value = Color.black;
     }
     public void ResetScore()
     {
@@ -184,13 +196,16 @@ public class PlayerStats : MonoBehaviour
     {
         if (m_currentHealth <= 0 && m_lives > 0)
         {
+            transform.GetChild(0).GetComponent<AudioSource>().Play();
             m_lives -= 1;
             if(m_ui != null)
-            m_livesText.text = "Lives: " + m_lives;
+            m_livesText.text = "<sprite index= 0> x " + m_lives;
             m_currentHealth = m_maxHealth;
             GetComponent<PlayerMovement>().RopeReset();
             m_ui.transform.GetChild(0).GetComponent<Slider>().value = m_currentHealth;
             m_ui.transform.GetChild(1).GetComponent<Slider>().value = m_currentShield;
+            m_heartImage.SetActive(true);
+       
             Respawn();
             GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, GetComponent<SpriteRenderer>().color.a / 2);
         }
@@ -265,14 +280,6 @@ public class PlayerStats : MonoBehaviour
         }
     }
     
-    void PlayBloodEffect()
-    {
-        m_bloodEffect.Play();
-    } 
-    void PlayShieldEffect()
-    {
-        m_shieldEffect.Play();
-    }
     public int GetWhiteKeyTotal()
     {
         return m_whiteKeyTotal;
@@ -295,7 +302,6 @@ public class PlayerStats : MonoBehaviour
             newGameObject.GetComponent<ParticleSystem>().Play();
             Destroy(newGameObject, newGameObject.GetComponent<ParticleSystem>().main.duration * 2);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -337,7 +343,20 @@ public class PlayerStats : MonoBehaviour
         else
         {
             if (m_ui != null)
-                m_uiKeysText.text = "Need more " + _colour.ToString() + " keys";
+            {
+                switch (_colour)
+                {
+                    case DoorColour.White:
+                        m_uiKeysText.text = "Need more" + "<sprite index= 0>" + " keys";
+                        break;
+                    case DoorColour.Purple:
+                        m_uiKeysText.text = "Need more" + "<sprite index= 1>" + " keys";
+                        break;
+                    case DoorColour.Orange:
+                        m_uiKeysText.text = "Need more" + "<sprite index= 2>" + " keys";
+                        break;
+                }
+            }
         }
     }
     public int GetCurrentHealth()

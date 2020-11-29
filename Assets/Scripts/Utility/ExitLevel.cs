@@ -82,6 +82,7 @@ public class ExitLevel : MonoBehaviour
             transform.GetChild(2).gameObject.SetActive(false);
         }
         transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(transform.GetChild(1).GetComponent<ParticleSystem>().main.duration);
         LoadLevelInGame(NextLevelIndex);
     }

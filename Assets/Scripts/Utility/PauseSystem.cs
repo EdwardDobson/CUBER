@@ -39,7 +39,7 @@ public class PauseSystem : MonoBehaviour
             {
                 Paused();
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && m_paused)
+            else if (Input.GetKeyDown(KeyCode.Escape) && m_paused && PauseObj.activeSelf)
             {
                 Resume();
             }

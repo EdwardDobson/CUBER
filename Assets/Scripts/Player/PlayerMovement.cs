@@ -40,10 +40,7 @@ public class PlayerMovement : MonoBehaviour
     float m_yWallForce;
     [SerializeField]
     float m_wallJumpTime;
-    ParticleSystem m_jumpParticles;
-    ParticleSystem m_grappleParticles;
-    ParticleSystem m_grappleHitParticles;
-    ParticleSystem m_landParticles;
+    ParticleManager m_particleManager;
     // Start is called before the first frame update
     GhostReplay m_replay;
     Vector2 m_oldVelo;
@@ -56,10 +53,7 @@ public class PlayerMovement : MonoBehaviour
         m_groundCheck.setIsGround(true);
         m_wallMask = LayerMask.GetMask("Wall");
         //  m_replay = GameObject.Find("Ghost").GetComponent<GhostReplay>();
-        m_jumpParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
-        m_grappleParticles = transform.GetChild(6).GetComponent<ParticleSystem>();
-        m_grappleHitParticles = transform.GetChild(7).GetComponent<ParticleSystem>();
-        m_landParticles = transform.GetChild(8).GetComponent<ParticleSystem>();
+        m_particleManager = GetComponent<ParticleManager>();
         m_grappleLine = transform.GetChild(4).GetComponent<LineRenderer>();
         rope.gameObject.SetActive(false);
         rope.gameObject.SetActive(true);
@@ -88,10 +82,7 @@ public class PlayerMovement : MonoBehaviour
         Squish();
         RunGrapple();
         if(m_groundCheck.isGrounded() && m_rb2d.velocity.y != 0)
-        {
-            m_landParticles.Play();
-            m_landParticles.GetComponent<AudioSource>().Play();
-        }
+                m_particleManager.PlayEffect(ParticleType.Landing,true);
         }
     }
     private void FixedUpdate()
@@ -136,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
        if(m_isSliding)
             transform.localScale = new Vector3(1, 0.8f, 1);
     }
+
     void WallGrab()
     {
         m_grabbedWall = Physics2D.OverlapCircle(m_frontCheck.position, m_checkRadius, m_wallMask);
@@ -143,18 +135,24 @@ public class PlayerMovement : MonoBehaviour
             m_wallSliding = true;
         else
             m_wallSliding = false;
+        /*
         if (m_wallSliding)
             m_rb2d.velocity = new Vector2(m_rb2d.velocity.x, Mathf.Clamp(m_rb2d.velocity.y, -m_wallSlidingSpeed, float.MaxValue));
+            */
         if (m_wallJumping)
         {
             if (m_oldVelo.x == 0)
                 m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
             else
             {
-                if (m_oldVelo.x < 0 )
+                if(-m_oldVelo.x >= -m_xWallForce)
                     m_rb2d.velocity = new Vector2(-m_oldVelo.x * m_horizontal, m_yWallForce);
                 else
+                    m_rb2d.velocity = new Vector2(-m_xWallForce * m_horizontal, m_yWallForce);
+                if (m_oldVelo.x >= m_xWallForce)
                     m_rb2d.velocity = new Vector2(m_oldVelo.x * m_horizontal, m_yWallForce);
+                else
+                    m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
             }
         }
     }
@@ -166,16 +164,15 @@ public class PlayerMovement : MonoBehaviour
             Invoke("SetWallJumpingFalse", m_wallJumpTime);
             MakeDust();
         }
-
     }
     void SetWallJumpingFalse()
     {
         m_wallJumping = false;
     }
+
     void MakeDust()
     {
-        m_jumpParticles.Play();
-        m_jumpParticles.GetComponent<AudioSource>().Play();
+        m_particleManager.PlayEffect(ParticleType.Jumping,true);
     }
     public void SetStart(bool _start)
     {
@@ -184,20 +181,15 @@ public class PlayerMovement : MonoBehaviour
     #region Grapple Code
     [SerializeField]
     float m_grappleRange;
-    bool m_grappleAttached = false;
     LineRenderer m_grappleLine;
     public DistanceJoint2D RopeJoint;
     [SerializeField]
     List<Vector2> m_ropePositions = new List<Vector2>();
-    bool m_distanceSet;
     public Rigidbody2D RopeAnchor;
     void RunGrapple()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-        {
             GrappleToPoint();
-
-        }
         if (Input.GetKeyUp(KeyCode.Q))
             RopeReset();
         ResetRopePositions();
@@ -205,7 +197,6 @@ public class PlayerMovement : MonoBehaviour
     public void RopeReset()
     {
         RopeJoint.enabled = false;
-        m_grappleAttached = false;
         m_grappleLine.positionCount = 2;
         m_grappleLine.SetPosition(0, transform.position);
         m_grappleLine.SetPosition(1, transform.position);
@@ -220,17 +211,15 @@ public class PlayerMovement : MonoBehaviour
             {
                     if (m_ropePositions.Count < 1)
                     {
-                        m_grappleAttached = true;
-            
                         m_ropePositions.Add(hit.point);
                         RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
                         RopeJoint.enabled = true;
-                        m_grappleHitParticles.gameObject.transform.position = hit.point;
+                    m_particleManager.PlayEffect(ParticleType.GrappleHit);
                     if (m_grappleUsedCount > 0)
                     {
                         m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-                        m_grappleParticles.Play();
-                        m_grappleHitParticles.Play();
+                        m_particleManager.PlayEffect(ParticleType.GrappleHit);
+                        m_particleManager.PlayEffect(ParticleType.GrappleLaunch);
                     }
                     m_grappleUsedCount++;
                     if (m_grappleUsedCount >= 1)
@@ -260,11 +249,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 ropePosition;
             ropePosition = _vec[_vec.Count - 1];
         RopeAnchor.transform.position = ropePosition;
-        if (!m_distanceSet)
-        {
-            RopeJoint.distance = Vector2.Distance(transform.position, ropePosition);
-            m_distanceSet = true;
-        }
+        RopeJoint.distance = Vector2.Distance(transform.position, ropePosition);
     }
     #endregion
+    public float GetHorizontal()
+    {
+        return m_horizontal;
+    }
 }

@@ -8,15 +8,7 @@ public class GroundCheck : MonoBehaviour
     bool m_grounded;
     [SerializeField]
     float m_groundDistance;
-    [SerializeField]
-    GameObject m_objectUnder;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         Check();
@@ -26,8 +18,12 @@ public class GroundCheck : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, m_groundDistance);
         if (hit.collider != null)
         {
+            if(hit.collider.gameObject.tag.Contains("Platform") || hit.collider.gameObject.tag.Contains("Wall") || hit.collider.gameObject.tag.Contains("Door"))
+            {
                 m_grounded = true;
                 Debug.DrawRay(transform.position, -Vector2.up);
+            }
+   
         }
         else
         {
@@ -41,9 +37,5 @@ public class GroundCheck : MonoBehaviour
     public void setIsGround(bool _state)
     {
         m_grounded = _state;
-    }
-    public GameObject ObjectUnderPlayer()
-    {
-        return m_objectUnder;
     }
 }

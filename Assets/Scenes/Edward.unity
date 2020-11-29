@@ -2287,16 +2287,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2050443783}
     m_Modifications:
-    - target: {fileID: 2252843416409973456, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2252843416409973459, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
       propertyPath: m_Name
       value: WhiteDoorToOpen
       objectReference: {fileID: 0}
     - target: {fileID: 2252843416409973462, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252843416409973462, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252843416409973462, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2252843416409973463, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
@@ -2342,10 +2346,6 @@ PrefabInstance:
     - target: {fileID: 2252843416409973463, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2252843416409973463, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0324833
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}

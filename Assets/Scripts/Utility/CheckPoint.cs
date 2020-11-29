@@ -17,7 +17,9 @@ public class CheckPoint : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerStats>().SetSpawnPoint(transform.position);
             GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().color = Color.green;
             m_checkPointSound.Play();
+            transform.GetChild(1).GetComponent<ParticleSystem>().Play();
             StartCoroutine(ShowText());
         }
     }

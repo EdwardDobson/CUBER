@@ -110,13 +110,13 @@ public class PlayerMovement : MonoBehaviour
                 m_isJumping = true;
             if (Input.GetKeyDown(KeyCode.LeftShift) && !m_isSliding)
             {
-                m_speed *= m_speedBoost;
-                m_isSliding = true;
+          //      m_speed *= m_speedBoost;
+        //        m_isSliding = true;
             }
             if (Input.GetKeyUp(KeyCode.LeftShift) && m_isSliding)
             {
-                m_isSliding = false;
-                m_speed = m_speed / m_speedBoost;
+         //       m_isSliding = false;
+           //     m_speed = m_speed / m_speedBoost;
             }
         }
     }

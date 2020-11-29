@@ -2287,6 +2287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2050443783}
     m_Modifications:
+    - target: {fileID: 1555046825310575591, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2252843416409973459, guid: 9e75c011c5355d94da66955aaa25f619, type: 3}
       propertyPath: m_Name
       value: WhiteDoorToOpen

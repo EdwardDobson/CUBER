@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -11,8 +12,10 @@ public class ExitLevel : MonoBehaviour
     bool m_stopTakingInput;
     bool m_playerIn;
     bool m_playerInLevelExit;
+    PostProcessProfile m_profile;
     private void Start()
     {
+        m_profile = GameObject.Find("PostFx").GetComponent<PostProcessVolume>().profile;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -88,6 +91,7 @@ public class ExitLevel : MonoBehaviour
     }
     public  void LoadLevelInGame(int _index)
     {
+        m_profile.GetSetting<Vignette>().color.value = Color.black;
         StartCoroutine(LoadAsync(_index));
     }
     IEnumerator LoadAsync(int _index)

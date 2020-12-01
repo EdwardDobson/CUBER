@@ -45571,6 +45571,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_groundSpeedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_airSpeedMultiplier
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_xWallForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_frontCheck
+      value: 
+      objectReference: {fileID: 7374517360099249155}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: RopeJoint
+      value: 
+      objectReference: {fileID: 7374517360099249156}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: RopeAnchor
+      value: 
+      objectReference: {fileID: 7374517360099249154}
     - target: {fileID: 7374517359758440169, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -45621,6 +45649,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+--- !u!50 &7374517360099249154 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1225417027, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+  m_PrefabInstance: {fileID: 7374517360099249153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7374517360099249155 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 590215909849917132, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+  m_PrefabInstance: {fileID: 7374517360099249153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!232 &7374517360099249156 stripped
+DistanceJoint2D:
+  m_CorrespondingSourceObject: {fileID: 1154058459, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+  m_PrefabInstance: {fileID: 7374517360099249153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!483693784 &7403280522505442041
 TilemapRenderer:
   m_ObjectHideFlags: 1

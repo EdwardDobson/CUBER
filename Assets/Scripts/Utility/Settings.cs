@@ -96,7 +96,7 @@ public class Settings : MonoBehaviour
         {
             m_ui.SetActive(true);
         }
-   
+
     }
     void SetAudioSettings()
     {
@@ -203,10 +203,12 @@ public class Settings : MonoBehaviour
         if(FullscreenToggle.isOn || FullscreenTogglePaused.isOn)
         {
             Screen.fullScreen = true;
+
         }
         if (!FullscreenToggle.isOn || !FullscreenTogglePaused.isOn)
         {
             Screen.fullScreen = false;
+
         }
  
     }

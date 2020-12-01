@@ -97,8 +97,7 @@ public class PlayerMovement : MonoBehaviour
             m_isJumping = false;
         }
         if (m_horizontal != 0 && m_groundCheck.isGrounded())
-            m_rb2d.velocity = new Vector2(m_horizontal, 0) * m_speed * m_groundSpeedMultiplier;
-        //     m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_groundSpeedMultiplier);
+         m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_groundSpeedMultiplier);
         else if (m_horizontal != 0 && !m_groundCheck.isGrounded())
             m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_airSpeedMultiplier);
     }

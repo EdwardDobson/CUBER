@@ -38960,7 +38960,7 @@ Transform:
   m_GameObject: {fileID: 1508349703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 77.676, y: 17.16, z: 0}
-  m_LocalScale: {x: 1.000043, y: 0.3125, z: 1}
+  m_LocalScale: {x: 1.000043, y: 0.55078125, z: 1}
   m_Children:
   - {fileID: 556915358}
   m_Father: {fileID: 0}
@@ -41080,7 +41080,7 @@ Transform:
   m_GameObject: {fileID: 1706675636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 82.036, y: 9.106, z: 0}
-  m_LocalScale: {x: 0.4790625, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.4790625, y: 0.51875, z: 1}
   m_Children:
   - {fileID: 178359892}
   m_Father: {fileID: 0}
@@ -46057,7 +46057,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_speed
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_groundSpeedMultiplier
@@ -46083,13 +46083,17 @@ PrefabInstance:
       propertyPath: RopeAnchor
       value: 
       objectReference: {fileID: 7374517360099249154}
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_speedBoost
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440169, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440170, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_LinearDrag
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440172, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_LocalPosition.x

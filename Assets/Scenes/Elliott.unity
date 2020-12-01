@@ -2385,15 +2385,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.r
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.g
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.b
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2401,7 +2401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0679998
+      value: 2.011
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2439,9 +2439,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.345
+      objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Name
       value: Falling Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667615, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: EndPoint.x
@@ -6672,6 +6680,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7374517359758440168, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
+      propertyPath: m_speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7374517359758440169, guid: 3853433d9cdb73240a3cb143564f2d7f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -18005,15 +18017,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.r
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.g
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.b
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18021,7 +18033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.448
+      value: 3.381
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18059,9 +18071,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.31500003
+      objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Name
       value: Falling Platform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667615, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: EndPoint.x
@@ -38469,15 +38489,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.r
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.g
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665760, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Color.b
-      value: 0.23584908
+      value: 0.509434
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38485,7 +38505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8579998
+      value: 2.791
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38523,9 +38543,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263665761, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3375
+      objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: m_Name
       value: Falling Platform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002925838263667614, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 3002925838263667615, guid: 4a52e3b1baf895245938280d3488678a, type: 3}
       propertyPath: EndPoint.x

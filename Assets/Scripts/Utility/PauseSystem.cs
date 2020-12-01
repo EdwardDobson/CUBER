@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseSystem : MonoBehaviour
 {
     bool m_paused;
-    public GameObject PauseObj;
+    public GameObject[] PauseObjs;
     public bool CanPause;
     private static PauseSystem Instance;
     void Awake()
@@ -39,7 +39,7 @@ public class PauseSystem : MonoBehaviour
             {
                 Paused();
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && m_paused && PauseObj.activeSelf)
+            else if (Input.GetKeyDown(KeyCode.Escape) && m_paused && PauseObjs[0].activeSelf && PauseObjs[1].activeSelf)
             {
                 Resume();
             }
@@ -51,14 +51,16 @@ public class PauseSystem : MonoBehaviour
         m_paused = true;
         Time.timeScale = 0;
         Debug.Log("Paused");
-        PauseObj.SetActive(true);
+        PauseObjs[0].SetActive(true);
+        PauseObjs[1].SetActive(true);
     }
   public  void Resume()
     {
         Debug.Log("Resume");
         m_paused = false;
         Time.timeScale = 1;
-        PauseObj.SetActive(false);
+        PauseObjs[0].SetActive(false);
+        PauseObjs[1].SetActive(false);
     }
     public bool GetPauseState()
     {

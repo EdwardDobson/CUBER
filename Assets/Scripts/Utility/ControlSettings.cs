@@ -18,6 +18,7 @@ public class ControlSettings : MonoBehaviour
     public ControlsMenuDirection Direction;
     public TextMeshProUGUI Title;
     public TextMeshProUGUI Description;
+    public TMP_Dropdown VideoDropdown;
     string[] Descriptions = new string[] { "Press Space to jump.", "Press Q to grapple.", "Press A or D while on a wall." };
     [SerializeField]
     int m_index;
@@ -26,6 +27,7 @@ public class ControlSettings : MonoBehaviour
     {
         Direction = ControlsMenuDirection.None;
         m_index = 0;
+        if (Title != null)
         Title.text = VideoPlayer.clip.name;
         Description.text = Descriptions[m_index];
     }
@@ -33,7 +35,8 @@ public class ControlSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        VideoPlayer.clip = VideoClips[VideoDropdown.value];
+        Description.text = Descriptions[VideoDropdown.value];
     }
     public void SwitchVideo()
     {

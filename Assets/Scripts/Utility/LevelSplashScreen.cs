@@ -14,7 +14,7 @@ public class LevelSplashScreen : MonoBehaviour
     {
         GameObject.Find("Player").GetComponent<PlayerMovement>().SetStart(false);
         if(SceneManager.GetActiveScene().buildIndex > 1)
-        GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>().CanPause = false;
+        GameObject.Find("PauseAnotherVersion").GetComponent<PauseSystem>().CanPause = false;
         m_background = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         StartCoroutine(fadeOut(m_duration));
     }
@@ -33,7 +33,7 @@ public class LevelSplashScreen : MonoBehaviour
         }
         GameObject.Find("Player").GetComponent<PlayerMovement>().SetStart(true);
         if (SceneManager.GetActiveScene().buildIndex > 1)
-            GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>().CanPause = true;
+            GameObject.Find("PauseAnotherVersion").GetComponent<PauseSystem>().CanPause = true;
         gameObject.SetActive(false);
     }
 }

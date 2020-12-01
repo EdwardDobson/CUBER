@@ -48,7 +48,7 @@ public class Settings : MonoBehaviour
     {
         SetAudioSettings();
         SetColourBlindIntensityLoad();
-        m_pauseSystem = GameObject.Find("PauseMenuHolder").GetComponent<PauseSystem>();
+        m_pauseSystem = GameObject.Find("PauseAnotherVersion").GetComponent<PauseSystem>();
         SetColourBlindPresets();
         ColourBlindLoad();
         m_ui = transform.GetChild(0).gameObject;

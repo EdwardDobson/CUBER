@@ -33,6 +33,7 @@ public class ScoreManager : MonoBehaviour
     public bool ShouldSave;
     int m_levelIndex;
     int m_starAmount;
+    int m_levelSelectIndex = 1;
     string m_json;
     SaveData newData;
     SaveData dataToAdd;
@@ -198,7 +199,7 @@ public class ScoreManager : MonoBehaviour
             {
                 for (int ind = 0; ind < m_holder.datas[i].LevelIndex.Count; ++ind)
                 {
-                    if (m_holder.datas[i].LevelIndex[ind] == LevelSelector.value + 1)
+                    if (m_holder.datas[i].LevelIndex[ind] == m_levelSelectIndex)
                     {
                         Positions.text += (i + 1).ToString() + "\n";
                         for (int sc = 0; sc < m_holder.datas[i].Scores.Count; ++sc)
@@ -222,5 +223,9 @@ public class ScoreManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void SetLevelPickIndex(int _value)
+    {
+        m_levelSelectIndex = _value;
     }
 }

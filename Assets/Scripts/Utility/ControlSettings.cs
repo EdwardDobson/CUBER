@@ -19,7 +19,7 @@ public class ControlSettings : MonoBehaviour
     public TextMeshProUGUI Title;
     public TextMeshProUGUI Description;
     public TMP_Dropdown VideoDropdown;
-    string[] Descriptions = new string[] { "Press Space to jump.", "Press Q to grapple.", "Press A or D while on a wall." };
+    string[] Descriptions = new string[] { "Press Space to jump.", "Press Q to grapple.", "Press A or D + Space while on a wall." };
     [SerializeField]
     int m_index;
     // Start is called before the first frame update

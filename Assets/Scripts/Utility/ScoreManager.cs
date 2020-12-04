@@ -65,6 +65,7 @@ public class ScoreManager : MonoBehaviour
                 if (m_player.CheckIfDied())
                 {
                     WinScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.green;
+                    WinScreen.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text += "<sprite index= 0>";
                 }
                 else
                 {
@@ -73,6 +74,7 @@ public class ScoreManager : MonoBehaviour
                 if (m_player.GetBigStarCollected())
                 {
                     WinScreen.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.green;
+                    WinScreen.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text += "<sprite index= 0>";
                 }
                 else
                 {
@@ -81,6 +83,7 @@ public class ScoreManager : MonoBehaviour
                 if (m_player.GetPointThresholdMet())
                 {
                     WinScreen.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().color = Color.green;
+                    WinScreen.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text += "<sprite index= 0>";
                 }
                 else
                 {
@@ -128,6 +131,8 @@ public class ScoreManager : MonoBehaviour
         newData.Scores.Add(m_player.GetScore());
         newData.LevelIndex.Add(m_levelIndex);
         newData.StarCount.Add(m_starAmount);
+ 
+ 
         if (WinScreen != null)
             newData.Nickname.Add(WinScreen.transform.GetChild(9).GetComponent<TMP_InputField>().text);
         m_json = JsonUtility.ToJson(newData, true);

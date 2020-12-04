@@ -188,9 +188,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D RopeAnchor;
     void RunGrapple()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.W))
             GrappleToPoint();
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.W))
             RopeReset();
         ResetRopePositions();
     }

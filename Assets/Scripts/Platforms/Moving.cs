@@ -8,10 +8,10 @@ public class Moving : MonoBehaviour
     public float Speed;
     int m_index;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_index = 0;
-        Points.Add(transform.position);
+    //    Points.Add(transform.position);
     }
 
     // Update is called once per frame

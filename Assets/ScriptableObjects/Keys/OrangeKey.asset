@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0133fefc8c8a074bb4d400c9c58300e, type: 3}
   m_Name: OrangeKey
   m_EditorClassIdentifier: 
-  Value: 0
+  Value: 1
   PickupType: 4
   ShouldReduceValue: 0
   SoundClip: {fileID: 8300000, guid: fc3a08f183cc530458a594e6a2834b23, type: 3}

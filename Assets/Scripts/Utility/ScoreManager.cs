@@ -195,29 +195,30 @@ public class ScoreManager : MonoBehaviour
             Stars.text = "";
             Nicknames.text = "";
             int starCount;
-            m_holder.datas = m_holder.datas.OrderByDescending(s => s.Scores.Max()).ToList();
-            if(m_holder.datas.Count > 10)
+            List<SaveData> tempDatas = m_holder.datas.Where(s => s.LevelIndex.Contains(m_levelSelectIndex)).ToList();
+            tempDatas = tempDatas.OrderByDescending(s => s.Scores.Max()).ToList();
+            if (tempDatas.Count > 10)
             {
-                m_holder.datas.RemoveRange(10, m_holder.datas.Count - 10);
+                tempDatas.RemoveRange(10, tempDatas.Count - 10);
             }
-            for (int i = 0; i < m_holder.datas.Count; ++i)
+            for (int i = 0; i < tempDatas.Count; ++i)
             {
-                for (int ind = 0; ind < m_holder.datas[i].LevelIndex.Count; ++ind)
+                for (int ind = 0; ind < tempDatas[i].LevelIndex.Count; ++ind)
                 {
-                    if (m_holder.datas[i].LevelIndex[ind] == m_levelSelectIndex)
+                    if (tempDatas[i].LevelIndex[ind] == m_levelSelectIndex)
                     {
                         Positions.text += (i + 1).ToString() + "\n";
-                        for (int sc = 0; sc < m_holder.datas[i].Scores.Count; ++sc)
+                        for (int sc = 0; sc < tempDatas[i].Scores.Count; ++sc)
                         {
-                            HighestScores.text += m_holder.datas[i].Scores[sc].ToString() + "\n";
+                            HighestScores.text += tempDatas[i].Scores[sc].ToString() + "\n";
                         }
-                        for (int n = 0; n < m_holder.datas[i].Nickname.Count; ++n)
+                        for (int n = 0; n < tempDatas[i].Nickname.Count; ++n)
                         {
-                            Nicknames.text += m_holder.datas[i].Nickname[n] + "\n";
+                            Nicknames.text += tempDatas[i].Nickname[n] + "\n";
                         }
-                        for (int s = 0; s < m_holder.datas[i].StarCount.Count; ++s)
+                        for (int s = 0; s < tempDatas[i].StarCount.Count; ++s)
                         {
-                            starCount = m_holder.datas[i].StarCount[s];
+                            starCount = tempDatas[i].StarCount[s];
                             for (int a = 0; a < starCount; ++a)
                             {
                                 Stars.text += "<sprite index= 0>";

@@ -141,19 +141,7 @@ public class PlayerMovement : MonoBehaviour
             */
         if (m_wallJumping)
         {
-            if (m_oldVelo.x == 0)
-                m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
-            else
-            {
-                if(-m_oldVelo.x >= -m_xWallForce)
-                    m_rb2d.velocity = new Vector2(-m_oldVelo.x * m_horizontal, m_yWallForce);
-                else
-                    m_rb2d.velocity = new Vector2(-m_xWallForce * m_horizontal, m_yWallForce);
-                if (m_oldVelo.x >= m_xWallForce)
-                    m_rb2d.velocity = new Vector2(m_oldVelo.x * m_horizontal, m_yWallForce);
-                else
-                    m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
-            }
+            m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
         }
     }
     void WallJumping()

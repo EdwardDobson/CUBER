@@ -49,18 +49,16 @@ public class FallingPlatforms : MonoBehaviour
                         State = PlatformState.Recovering;
                     }
                 }
-      
                 break;
             case PlatformState.Recovering:
                 transform.position = Vector2.MoveTowards(transform.position, m_startPoint, RecoverySpeed * Time.deltaTime);
                 GetComponent<BoxCollider2D>().enabled = false;
                 if((Vector2)transform.position == m_startPoint)
                 {
-                     State =    PlatformState.Idle;
+                     State = PlatformState.Idle;
                 }
                 break;
         }
-
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

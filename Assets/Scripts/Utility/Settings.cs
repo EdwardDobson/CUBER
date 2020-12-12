@@ -203,14 +203,11 @@ public class Settings : MonoBehaviour
         if(FullscreenToggle.isOn || FullscreenTogglePaused.isOn)
         {
             Screen.fullScreen = true;
-
         }
         if (!FullscreenToggle.isOn || !FullscreenTogglePaused.isOn)
         {
             Screen.fullScreen = false;
-
         }
- 
     }
     public void MasterVolume(float _value)
     {
@@ -230,7 +227,6 @@ public class Settings : MonoBehaviour
     public void SetColourBlindIntensity(float _value)
     {
         PlayerPrefs.SetFloat("ColourBlindIntensity", _value);
-
         ColourBlindSettings.profile.GetSetting<ColorGrading>().ldrLutContribution.value = _value ;
     }
     public void Quit()

@@ -45,9 +45,7 @@ public class FollowPlayer : MonoBehaviour
                 m_cameraPositions.Add(t.position);
             }
             transform.position = m_cameraPositions[0];
-   
             m_doors = FindObjectsOfType<Door>();
         }
-
     }
 }

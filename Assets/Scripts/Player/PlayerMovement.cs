@@ -131,10 +131,6 @@ public class PlayerMovement : MonoBehaviour
     void WallGrab()
     {
         m_grabbedWall = Physics2D.OverlapCircle(m_frontCheck.position, m_checkRadius, m_wallMask);
-        if (m_grabbedWall && !m_groundCheck.isGrounded() && m_horizontal != 0)
-            m_wallSliding = true;
-        else
-            m_wallSliding = false;
         /*
         if (m_wallSliding)
             m_rb2d.velocity = new Vector2(m_rb2d.velocity.x, Mathf.Clamp(m_rb2d.velocity.y, -m_wallSlidingSpeed, float.MaxValue));
@@ -146,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void WallJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_wallSliding)
+        if (Input.GetKeyDown(KeyCode.Space) && m_grabbedWall)
         {
             m_wallJumping = true;
             Invoke("SetWallJumpingFalse", m_wallJumpTime);

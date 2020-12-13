@@ -5165,15 +5165,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 468895678783155647, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSize
-      value: 56
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 468895678783155647, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 56
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 468895678783155647, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_margin.x
-      value: -122.10981
+      value: -415.98572
       objectReference: {fileID: 0}
     - target: {fileID: 468895678783155647, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -5191,6 +5191,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -521053558532338600, guid: 2875be2c5871ec5479df8042f67f28ad, type: 2}
+    - target: {fileID: 468895678783155647, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
+      propertyPath: m_margin.z
+      value: -795.66614
+      objectReference: {fileID: 0}
     - target: {fileID: 779824802116380861, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -5389,7 +5393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851152568129836874, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 48
+      value: -212
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851152568129836874, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -515
       objectReference: {fileID: 0}
     - target: {fileID: 5084509688880770457, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_LocalPosition.x

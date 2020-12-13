@@ -220,7 +220,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void Respawn()
     {
-            transform.position = m_spawnLocation;
+        transform.position = m_spawnLocation;
     }
     public void SetSpawnPoint(Vector3 _location)
     {
@@ -397,10 +397,7 @@ public class PlayerStats : MonoBehaviour
             m_didntDie = false;
         return m_didntDie;
     }
-    public int AddToScore(int _value)
-    {
-        return m_currentScore += _value;
-    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("DoorToOpen"))

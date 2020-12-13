@@ -131,34 +131,18 @@ public class PlayerMovement : MonoBehaviour
     void WallGrab()
     {
         m_grabbedWall = Physics2D.OverlapCircle(m_frontCheck.position, m_checkRadius, m_wallMask);
-        if (m_grabbedWall && !m_groundCheck.isGrounded() && m_horizontal != 0)
-            m_wallSliding = true;
-        else
-            m_wallSliding = false;
         /*
         if (m_wallSliding)
             m_rb2d.velocity = new Vector2(m_rb2d.velocity.x, Mathf.Clamp(m_rb2d.velocity.y, -m_wallSlidingSpeed, float.MaxValue));
             */
         if (m_wallJumping)
         {
-            if (m_oldVelo.x == 0)
-                m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
-            else
-            {
-                if(-m_oldVelo.x >= -m_xWallForce)
-                    m_rb2d.velocity = new Vector2(-m_oldVelo.x * m_horizontal, m_yWallForce);
-                else
-                    m_rb2d.velocity = new Vector2(-m_xWallForce * m_horizontal, m_yWallForce);
-                if (m_oldVelo.x >= m_xWallForce)
-                    m_rb2d.velocity = new Vector2(m_oldVelo.x * m_horizontal, m_yWallForce);
-                else
-                    m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
-            }
+            m_rb2d.velocity = new Vector2(m_xWallForce * m_horizontal, m_yWallForce);
         }
     }
     void WallJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_wallSliding)
+        if (Input.GetKeyDown(KeyCode.Space) && m_grabbedWall)
         {
             m_wallJumping = true;
             Invoke("SetWallJumpingFalse", m_wallJumpTime);
@@ -186,13 +170,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     List<Vector2> m_ropePositions = new List<Vector2>();
     public Rigidbody2D RopeAnchor;
+    GameObject m_grabbedPlatform;
     void RunGrapple()
     {
         if (Input.GetKeyDown(KeyCode.W))
             GrappleToPoint();
         if (Input.GetKeyUp(KeyCode.W))
+        {
             RopeReset();
+            m_grabbedPlatform = null;
+        }
         ResetRopePositions();
+        if (m_grabbedPlatform != null && m_grabbedPlatform.transform.position.y > transform.position.y)
+        {
+            m_ropePositions.Clear();
+            m_ropePositions.Add(m_grabbedPlatform.transform.position);
+         
+        }
     }
     public void RopeReset()
     {
@@ -209,11 +203,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hit.collider.tag.Contains("Grapple") || hit.collider.tag.Contains("Wall"))
             {
-                    if (m_ropePositions.Count < 1)
-                    {
-                        m_ropePositions.Add(hit.point);
-                        RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
-                        RopeJoint.enabled = true;
+                if (m_ropePositions.Count < 1)
+                {
+                    m_ropePositions.Add(hit.point);
+                    RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
+                    RopeJoint.enabled = true;
                     m_particleManager.PlayEffect(ParticleType.GrappleHit);
                     if (m_grappleUsedCount > 0)
                     {
@@ -226,6 +220,30 @@ public class PlayerMovement : MonoBehaviour
                         m_grappleUsedCount = 1;
                 }
             }
+            /*
+            if (hit.collider.tag.Contains("Platform"))
+            {
+                if (m_ropePositions.Count < 1)
+                {
+                    m_grabbedPlatform = hit.transform.gameObject;
+                    RopeJoint.distance = Vector2.Distance(transform.position, hit.point);
+                    RopeJoint.enabled = true;
+                    m_particleManager.PlayEffect(ParticleType.GrappleHit);
+          
+                }
+                if (m_grappleUsedCount > 0)
+                {
+                    m_rb2d.AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                    m_particleManager.PlayEffect(ParticleType.GrappleHit);
+                    m_particleManager.PlayEffect(ParticleType.GrappleLaunch);
+                }
+                m_grappleUsedCount++;
+                if (m_grappleUsedCount >= 1)
+                    m_grappleUsedCount = 1;
+            }
+             */
+       
+  
         }
     }
     void ResetRopePositions()

@@ -5221,11 +5221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 779824802116380861, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSize
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 779824802116380861, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1441913557972014423, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontAsset
@@ -5253,11 +5253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1441913557972014423, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSize
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1441913557972014423, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2919608448691281009, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -5385,11 +5385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4696536739185167744, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSize
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4696536739185167744, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4851152568129836874, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5637,11 +5637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7849077280149808616, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSize
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7849077280149808616, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7867970036768908578, guid: 76c28cdd7abe94d439f1fb48968f798d, type: 3}
       propertyPath: m_Color.a

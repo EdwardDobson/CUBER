@@ -61,7 +61,7 @@ public class RebindControls : MonoBehaviour
             {
                 Event e = Event.current;
 
-                if (e.isKey && e.type == EventType.KeyUp)
+                if (e.isKey && e.type == EventType.KeyUp && e.keyCode != KeyCode.Escape)
                 {
                     if (Codes.All(c => c != e.keyCode))
                     {

@@ -120,7 +120,7 @@ public class RebindControls : MonoBehaviour
         FieldsPaused[4].text = Codes[4].ToString();
         FieldsPaused[5].text = Codes[5].ToString();
     }
-    void LoadControls()
+ public   void LoadControls()
     {
         Codes[0] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Grapple"));
         Codes[1] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left"));

@@ -22,6 +22,11 @@ public class RebindControls : MonoBehaviour
         {
             FieldsPaused[i].characterLimit = 1;
         }
+        if(Fields.All(c => c.text == "" ))
+        {
+            ResetControls();
+        }
+        else
         LoadControls();
     }
     private void OnGUI()

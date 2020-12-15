@@ -103,16 +103,22 @@ public class RebindControls : MonoBehaviour
         Codes[1] = KeyCode.A;
         Codes[2] = KeyCode.D;
         Codes[3] = KeyCode.Space;
+        Codes[4] = KeyCode.Tab;
+        Codes[5] = KeyCode.E;
 
         Fields[0].text = Codes[0].ToString();
         Fields[1].text = Codes[1].ToString();
         Fields[2].text = Codes[2].ToString();
         Fields[3].text = Codes[3].ToString();
+        Fields[4].text = Codes[4].ToString();
+        Fields[5].text = Codes[5].ToString();
 
         FieldsPaused[0].text = Codes[0].ToString();
         FieldsPaused[1].text = Codes[1].ToString();
         FieldsPaused[2].text = Codes[2].ToString();
         FieldsPaused[3].text = Codes[3].ToString();
+        FieldsPaused[4].text = Codes[4].ToString();
+        FieldsPaused[5].text = Codes[5].ToString();
     }
     void LoadControls()
     {
@@ -120,16 +126,22 @@ public class RebindControls : MonoBehaviour
         Codes[1] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left"));
         Codes[2] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right"));
         Codes[3] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump"));
+        Codes[4] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Tab"));
+        Codes[5] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact"));
 
         Fields[0].text = Codes[0].ToString();
         Fields[1].text = Codes[1].ToString();
         Fields[2].text = Codes[2].ToString();
         Fields[3].text = Codes[3].ToString();
+        Fields[4].text = Codes[4].ToString();
+        Fields[5].text = Codes[5].ToString();
 
         FieldsPaused[0].text = Codes[0].ToString();
         FieldsPaused[1].text = Codes[1].ToString();
         FieldsPaused[2].text = Codes[2].ToString();
         FieldsPaused[3].text = Codes[3].ToString();
+        FieldsPaused[4].text = Codes[4].ToString();
+        FieldsPaused[5].text = Codes[5].ToString();
     }
     public void SaveControl()
     {
@@ -137,5 +149,7 @@ public class RebindControls : MonoBehaviour
         PlayerPrefs.SetString("Left", Codes[1].ToString());
         PlayerPrefs.SetString("Right", Codes[2].ToString());
         PlayerPrefs.SetString("Jump", Codes[3].ToString());
+        PlayerPrefs.SetString("Tab", Codes[4].ToString());
+        PlayerPrefs.SetString("Interact", Codes[5].ToString());
     }
 }

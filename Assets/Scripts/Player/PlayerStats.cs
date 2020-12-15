@@ -48,6 +48,9 @@ public class PlayerStats : MonoBehaviour
     AudioSource m_source;
     PostProcessProfile m_volume;
     GameObject m_heartImage;
+    RebindControls m_controls;
+    TextMeshProUGUI m_objectivesText;
+    TextMeshProUGUI m_grappleText;
     void Start()
     {
 
@@ -71,6 +74,8 @@ public class PlayerStats : MonoBehaviour
             m_livesText = m_ui.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             m_uiKeysText = m_ui.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
+            m_grappleText = m_ui.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+            m_objectivesText = m_ui.transform.GetChild(9).GetComponent<TextMeshProUGUI>();
             m_uiKeysText.text = "";
             m_livesText.text = "<sprite index= 0> x " + m_lives;
             m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
@@ -84,7 +89,7 @@ public class PlayerStats : MonoBehaviour
         m_particleManager = GetComponent<ParticleManager>();
         m_volume.GetSetting<Vignette>().color.value = Color.black;
         Invoke("LateStart", 0.5f);
-
+        m_controls = GameObject.Find("Rebindable Holder").GetComponent<RebindControls>();
     }
     void LateStart()
     {
@@ -101,6 +106,8 @@ public class PlayerStats : MonoBehaviour
     }
     void Update()
     {
+        m_objectivesText.text = m_controls.Codes[4] + ":" + "Objectives";
+        m_grappleText.text = m_controls.Codes[0] + ":" + "Grapple";
         if (m_currentHealth > m_maxHealth)
             m_currentHealth = m_maxHealth;
         if (m_currentShield > m_maxShield)
@@ -122,7 +129,7 @@ public class PlayerStats : MonoBehaviour
             m_gainedScoreThreshold = true;
         }
         else m_gainedScoreThreshold = false;
-        if(Input.GetKey(KeyCode.Tab) && SceneManager.GetActiveScene().buildIndex > 1)
+        if(Input.GetKey(m_controls.Codes[4]) && SceneManager.GetActiveScene().buildIndex > 1)
         {
             m_objectivesScreen.SetActive(true);
         }

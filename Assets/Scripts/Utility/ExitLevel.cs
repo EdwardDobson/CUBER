@@ -13,9 +13,11 @@ public class ExitLevel : MonoBehaviour
     bool m_playerIn;
     bool m_playerInLevelExit;
     PostProcessProfile m_profile;
+    RebindControls m_controls;
     private void Start()
     {
         m_profile = GameObject.Find("PostFx").GetComponent<PostProcessVolume>().profile;
+        m_controls = GameObject.Find("Rebindable Holder").GetComponent<RebindControls>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,13 +29,14 @@ public class ExitLevel : MonoBehaviour
                 if (transform.childCount > 1)
                 {
                     transform.GetChild(2).gameObject.SetActive(true);
+                    transform.GetChild(2).GetComponent<TextMeshPro>().text = "Press " + m_controls.Codes[5].ToString();
                 }
 
             }
             if (SceneManager.GetActiveScene().buildIndex > 1)
             {
                 m_playerInLevelExit = true;
-                transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = "Press E";
+                transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = "Press " + m_controls.Codes[5].ToString();
             }
         }
     }
@@ -57,7 +60,7 @@ public class ExitLevel : MonoBehaviour
     {
         if(m_playerIn)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !m_stopTakingInput)
+            if (Input.GetKeyDown(m_controls.Codes[5]) && !m_stopTakingInput)
             {
                 if (transform.childCount > 1)
                 {
@@ -72,7 +75,7 @@ public class ExitLevel : MonoBehaviour
         }
         if (m_playerInLevelExit)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(m_controls.Codes[5]))
             {
                 GameObject.Find("GameManager").GetComponent<ScoreManager>().SaveDataVisual();
                 transform.gameObject.SetActive(false);

@@ -9,6 +9,7 @@ public class PauseSystem : MonoBehaviour
     public GameObject[] PauseObjs;
     public bool CanPause;
     private static PauseSystem Instance;
+    
     void Awake()
     {
         DontDestroyOnLoad(this);

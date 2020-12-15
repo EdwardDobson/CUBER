@@ -1946,7 +1946,7 @@ TextureImporter:
         height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 3, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -216.5, y: 123}
         - {x: -226.5, y: 96}
@@ -1982,11 +1982,11 @@ TextureImporter:
         serializedVersion: 2
         x: 152
         y: 0
-        width: 148
+        width: 158
         height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2006,8 +2006,8 @@ TextureImporter:
         width: 152
         height: 246
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 11, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

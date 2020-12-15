@@ -71,6 +71,7 @@ public class PlayerStats : MonoBehaviour
             m_livesText = m_ui.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             m_scoreText = m_ui.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             m_uiKeysText = m_ui.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
+            m_uiKeysText.text = "";
             m_livesText.text = "<sprite index= 0> x " + m_lives;
             m_keyTexts[0] = m_ui.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
             m_keyTexts[1] = m_ui.transform.GetChild(7).GetComponent<TextMeshProUGUI>();

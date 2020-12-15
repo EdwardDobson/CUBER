@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 m_oldVelo;
     int m_grappleUsedCount;
     bool m_start;
+    RebindControls m_controls;
     private void Awake()
     {
         GameObject rope = transform.GetChild(5).gameObject;
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         m_rb2d = GetComponent<Rigidbody2D>();
         GrappleToPoint();
         RopeReset();
+        m_controls = GameObject.Find("Rebindable Holder").GetComponent<RebindControls>();
     }
     void Update()
     {
@@ -103,21 +105,18 @@ public class PlayerMovement : MonoBehaviour
     }
     void MoveInput()
     {
-        m_horizontal = Input.GetAxis("Horizontal");
-        if(m_groundCheck.isGrounded())
+        if (Input.GetKeyDown(m_controls.Codes[1]))
+            m_horizontal = -1;
+        if (Input.GetKeyDown(m_controls.Codes[2]))
+            m_horizontal =1;
+        if (Input.GetKeyUp(m_controls.Codes[1]))
+            m_horizontal = 0;
+        if (Input.GetKeyUp(m_controls.Codes[2]))
+            m_horizontal = 0;
+        if (m_groundCheck.isGrounded())
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(m_controls.Codes[3]))
                 m_isJumping = true;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !m_isSliding)
-            {
-          //      m_speed *= m_speedBoost;
-        //        m_isSliding = true;
-            }
-            if (Input.GetKeyUp(KeyCode.LeftShift) && m_isSliding)
-            {
-         //       m_isSliding = false;
-           //     m_speed = m_speed / m_speedBoost;
-            }
         }
     }
     void Squish()
@@ -142,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void WallJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_grabbedWall)
+        if (Input.GetKeyDown(m_controls.Codes[3]) && m_grabbedWall)
         {
             m_wallJumping = true;
             Invoke("SetWallJumpingFalse", m_wallJumpTime);
@@ -173,9 +172,9 @@ public class PlayerMovement : MonoBehaviour
     GameObject m_grabbedPlatform;
     void RunGrapple()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(m_controls.Codes[0]))
             GrappleToPoint();
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(m_controls.Codes[0]))
         {
             RopeReset();
             m_grabbedPlatform = null;

@@ -22,6 +22,7 @@ public class ControlSettings : MonoBehaviour
     string[] Descriptions = new string[] { "Press Space to jump.", "Press W to grapple.", "Press A or D + Space while on a wall." };
     [SerializeField]
     int m_index;
+    RebindControls m_controls;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,14 @@ public class ControlSettings : MonoBehaviour
         Title.text = VideoPlayer.clip.name;
         Description.text = Descriptions[m_index];
     }
-
+    private void OnEnable()
+    {
+        m_controls = GameObject.Find("Rebindable Holder").GetComponent<RebindControls>();
+        Descriptions = new string[3];
+        Descriptions[0] = "Press " + m_controls.Codes[3].ToString() + " to jump.";
+        Descriptions[1] = "Press " + m_controls.Codes[0].ToString() + " to grapple.";
+        Descriptions[2] = "Press " + m_controls.Codes[1].ToString() + " or " + m_controls.Codes[2].ToString() + " while on a wall.";
+    }
     // Update is called once per frame
     void Update()
     {

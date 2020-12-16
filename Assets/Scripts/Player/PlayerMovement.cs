@@ -105,10 +105,18 @@ public class PlayerMovement : MonoBehaviour
     }
     void MoveInput()
     {
-        if (Input.GetKeyDown(m_controls.Codes[1]))
-            m_horizontal = -1;
-        if (Input.GetKeyDown(m_controls.Codes[2]))
-            m_horizontal =1;
+        if (Input.GetKey(m_controls.Codes[1]))
+        {
+            if(m_horizontal >= -1 && m_horizontal <= 0)
+            m_horizontal -= Time.deltaTime * m_speed;
+        }
+   
+        if (Input.GetKey(m_controls.Codes[2]))
+        {
+            if ( m_horizontal <= 1)
+                m_horizontal += Time.deltaTime * m_speed;
+        }
+         
         if (Input.GetKeyUp(m_controls.Codes[1]))
             m_horizontal = 0;
         if (Input.GetKeyUp(m_controls.Codes[2]))

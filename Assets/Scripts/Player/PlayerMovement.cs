@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     int m_grappleUsedCount;
     bool m_start;
     RebindControls m_controls;
+    bool m_leftDown;
+    bool m_rightDown;
     private void Awake()
     {
         GameObject rope = transform.GetChild(5).gameObject;
@@ -99,28 +101,36 @@ public class PlayerMovement : MonoBehaviour
             m_isJumping = false;
         }
         if (m_horizontal != 0 && m_groundCheck.isGrounded())
-         m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_groundSpeedMultiplier);
+         m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_groundSpeedMultiplier );
         else if (m_horizontal != 0 && !m_groundCheck.isGrounded())
             m_rb2d.AddForce(new Vector2(m_horizontal, 0) * m_speed * m_airSpeedMultiplier);
     }
     void MoveInput()
     {
-        if (Input.GetKey(m_controls.Codes[1]))
+        if (Input.GetKey(m_controls.Codes[1]) && !m_rightDown)
         {
             if(m_horizontal >= -1 && m_horizontal <= 0)
             m_horizontal -= Time.deltaTime * m_speed;
+            m_leftDown = true;
         }
-   
-        if (Input.GetKey(m_controls.Codes[2]))
+        if (Input.GetKey(m_controls.Codes[2]) && !m_leftDown)
         {
-            if ( m_horizontal <= 1)
+            if (m_horizontal <= 1)
                 m_horizontal += Time.deltaTime * m_speed;
+            m_rightDown = true;
         }
-         
-        if (Input.GetKeyUp(m_controls.Codes[1]))
+        if (Input.GetKeyUp(m_controls.Codes[1]) && m_leftDown)
+        {
             m_horizontal = 0;
-        if (Input.GetKeyUp(m_controls.Codes[2]))
+            m_leftDown = false;
+        }
+            
+        if (Input.GetKeyUp(m_controls.Codes[2]) && m_rightDown)
+        {
             m_horizontal = 0;
+            m_rightDown = false;
+        }
+      
         if (m_groundCheck.isGrounded())
         {
             if (Input.GetKeyDown(m_controls.Codes[3]))
